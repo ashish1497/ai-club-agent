@@ -122,3 +122,41 @@ class TestInstallSh(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+PS1 = KIT / "install" / "install.ps1"
+GUIDE = KIT / "install" / "SETUP-GUIDE.md"
+
+
+class TestInstallPs1(unittest.TestCase):
+    def test_ps1_has_wao_header(self):
+        self.assertTrue(has_wao_header(PS1.read_text()))
+
+    def test_ps1_declares_same_parameters(self):
+        text = PS1.read_text()
+        for p in ["$Kit", "$Workspace", "$NonInteractive", "$Name", "$Level", "$Intensity", "$Interests"]:
+            self.assertIn(p, text)
+        for msg in ["level must be L1-L5", "intensity must be gentle, standard or relentless",
+                    "Open this folder in Claude Code:", "Read(./private-data/**)", ".COPIED",
+                    "Re-run the installer after every kit update"]:
+            self.assertIn(msg, text + (KIT / "install" / "claude-settings.json").read_text())
+
+    @unittest.skipUnless(shutil.which("pwsh"), "pwsh not installed")
+    def test_ps1_parity(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ws = Path(tmp) / "my space" / "my research"
+            r = subprocess.run(["pwsh", "-NoProfile", "-File", str(PS1), "-Kit", str(KIT), "-Workspace", str(ws),
+                                "-NonInteractive", "-Name", "Test User", "-Level", "L2", "-Interests", "a,b"],
+                               capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertIn("intensity: gentle", (ws / "profile.md").read_text())
+            self.assertTrue((ws / ".claude" / "skills" / "triage" / "SKILL.md").is_file())
+
+
+class TestSetupGuide(unittest.TestCase):
+    def test_setup_guide_sections(self):
+        text = GUIDE.read_text()
+        for h in ["## Before you start", "## Install (macOS)", "## Install (Windows)", "## First session",
+                  "## Updating", "## Optional: weekly digest on a schedule", "## Setup buddy checklist"]:
+            self.assertIn(h, text)
+        self.assertTrue(has_wao_header(text))
