@@ -5,7 +5,7 @@ industry: healthtech
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "No medical claims.; Public datasets only; raw self-measurements stay in private-data/."
+risk_flags: "No medical claims; Public datasets only; raw self-measurements stay in private-data/"
 last_verified: 2026-11-08
 ---
 

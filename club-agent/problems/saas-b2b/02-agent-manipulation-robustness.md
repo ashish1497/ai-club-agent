@@ -5,7 +5,7 @@ industry: saas-b2b
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "Focus on defences; test only systems you own.; Don't publish working exploits."
+risk_flags: "Focus on defences; test only systems you own; Don't publish working exploits"
 last_verified: 2026-11-08
 ---
 

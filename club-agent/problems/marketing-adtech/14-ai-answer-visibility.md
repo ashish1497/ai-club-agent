@@ -5,7 +5,7 @@ industry: marketing-adtech
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "Platform terms on automated querying."
+risk_flags: "Platform terms on automated querying"
 last_verified: 2026-11-08
 ---
 

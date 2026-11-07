@@ -5,7 +5,7 @@ industry: fintech
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "RBI authentication rules.; Consumer protection."
+risk_flags: "RBI authentication rules; Consumer protection"
 last_verified: 2026-11-08
 ---
 

@@ -5,7 +5,7 @@ industry: frontier-science
 seat: frontier-wildcard
 status: open
 funding_strength: strong
-risk_flags: "No real patient data.; No medical advice."
+risk_flags: "No real patient data; No medical advice"
 last_verified: 2026-11-08
 ---
 

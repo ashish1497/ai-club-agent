@@ -5,7 +5,7 @@ industry: real-estate
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "Valuation and disclosure liability."
+risk_flags: "Valuation and disclosure liability"
 last_verified: 2026-11-08
 ---
 

@@ -5,7 +5,7 @@ industry: ecommerce-retail
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "Agent platform terms on automated querying.; Manipulating agents could be deceptive."
+risk_flags: "Agent platform terms on automated querying; Manipulating agents could be deceptive"
 last_verified: 2026-11-08
 ---
 

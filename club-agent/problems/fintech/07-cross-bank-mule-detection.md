@@ -5,7 +5,7 @@ industry: fintech
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "False positives can freeze innocent people's accounts.; Synthetic data only."
+risk_flags: "False positives can freeze innocent people's accounts; Synthetic data only"
 last_verified: 2026-11-08
 ---
 

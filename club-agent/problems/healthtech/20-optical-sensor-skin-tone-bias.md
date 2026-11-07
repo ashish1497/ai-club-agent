@@ -5,7 +5,7 @@ industry: healthtech
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "No medical claims.; Consent for any personal data."
+risk_flags: "No medical claims; Consent for any personal data"
 last_verified: 2026-11-08
 ---
 

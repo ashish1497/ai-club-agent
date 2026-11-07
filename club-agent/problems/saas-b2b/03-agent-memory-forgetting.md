@@ -5,7 +5,7 @@ industry: saas-b2b
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "Privacy is the core of the problem; use synthetic personal data only."
+risk_flags: "Privacy is the core of the problem; use synthetic personal data only"
 last_verified: 2026-11-08
 ---
 

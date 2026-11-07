@@ -5,7 +5,7 @@ industry: fintech
 seat: form-weighted
 status: open
 funding_strength: medium
-risk_flags: "Fair-lending concerns.; Consent."
+risk_flags: "Fair-lending concerns; Consent"
 last_verified: 2026-11-08
 ---
 

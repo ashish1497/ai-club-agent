@@ -5,7 +5,7 @@ industry: ecommerce-retail
 seat: form-weighted
 status: open
 funding_strength: weak
-risk_flags: "Body and biometric data.; Misleading product depiction."
+risk_flags: "Body and biometric data; Misleading product depiction"
 last_verified: 2026-11-08
 ---
 

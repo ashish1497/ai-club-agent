@@ -5,7 +5,7 @@ industry: fintech
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "Never imitate real people.; Biometrics fall under DPDP."
+risk_flags: "Never imitate real people; Biometrics fall under DPDP"
 last_verified: 2026-11-08
 ---
 

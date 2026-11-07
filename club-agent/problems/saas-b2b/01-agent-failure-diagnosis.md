@@ -5,7 +5,7 @@ industry: saas-b2b
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "Use synthetic traces; real traces contain customer data."
+risk_flags: "Use synthetic traces; real traces contain customer data"
 last_verified: 2026-11-08
 ---
 

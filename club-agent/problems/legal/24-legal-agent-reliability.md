@@ -5,7 +5,7 @@ industry: legal
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "No legal advice to real parties.; Confidentiality."
+risk_flags: "No legal advice to real parties; Confidentiality"
 last_verified: 2026-11-08
 ---
 

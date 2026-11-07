@@ -5,7 +5,7 @@ industry: logistics
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "Labour displacement should be in scope as an outcome."
+risk_flags: "Labour displacement should be in scope as an outcome"
 last_verified: 2026-11-08
 ---
 

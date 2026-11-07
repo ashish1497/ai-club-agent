@@ -5,7 +5,7 @@ industry: ecommerce-retail
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "Competition-law and dark-pattern rules."
+risk_flags: "Competition-law and dark-pattern rules"
 last_verified: 2026-11-08
 ---
 

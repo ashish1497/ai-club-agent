@@ -5,7 +5,7 @@ industry: logistics
 seat: form-weighted
 status: open
 funding_strength: medium
-risk_flags: "None beyond the core rules."
+risk_flags: "None beyond the core rules"
 last_verified: 2026-11-08
 ---
 

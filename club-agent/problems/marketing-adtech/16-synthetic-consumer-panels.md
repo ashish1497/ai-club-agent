@@ -5,7 +5,7 @@ industry: marketing-adtech
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "Survey consent.; Rights over interview data used for training."
+risk_flags: "Survey consent; Rights over interview data used for training"
 last_verified: 2026-11-08
 ---
 

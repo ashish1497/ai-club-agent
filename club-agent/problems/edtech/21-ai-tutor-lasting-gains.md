@@ -5,7 +5,7 @@ industry: edtech
 seat: form-weighted
 status: open
 funding_strength: strong
-risk_flags: "Verifiable parental consent for any child data."
+risk_flags: "Verifiable parental consent for any child data"
 last_verified: 2026-11-08
 ---
 

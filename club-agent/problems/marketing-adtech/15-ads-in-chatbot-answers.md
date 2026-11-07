@@ -5,7 +5,7 @@ industry: marketing-adtech
 seat: form-weighted
 status: open
 funding_strength: medium
-risk_flags: "ASCI and Consumer Protection Act disclosure rules."
+risk_flags: "ASCI and Consumer Protection Act disclosure rules"
 last_verified: 2026-11-08
 ---
 
