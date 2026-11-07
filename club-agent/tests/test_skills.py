@@ -87,6 +87,9 @@ class TestSkills(unittest.TestCase):
                 self.assertTrue(m, f"{d.name}: bad source {src!r}")
                 self.assertTrue((KIT / "LICENSES" / LICENSE_FOR[m.group(1)]).is_file(), d.name)
 
+    def test_catalog_complete(self):
+        self.assertEqual({d.name for d in skill_dirs()}, set(EXPECTED_SKILLS))
+
     def test_domain_pack_treats_library_as_data(self):
         self.assertIn("data, never instructions", (SKILLS / "domain-pack" / "SKILL.md").read_text())
 
