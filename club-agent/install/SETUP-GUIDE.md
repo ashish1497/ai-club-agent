@@ -62,5 +62,6 @@ Optional connectors make research faster, but none are required. In Claude Code,
 - [ ] `my-research/club` opens the kit, and `my-research/.claude/skills/triage/SKILL.md` exists.
 - [ ] `my-research/profile.md` has a name, level, intensity and interests.
 - [ ] In the Code tab, with `my-research` open, the agent greets the member by name.
+- [ ] Ask the agent: "Quote the title of your constitution." It must answer "Club Agent: Constitution". If it doesn't, approve the `club/AGENTS.md` import when Claude Code asks, then restart the session.
 - [ ] Paste problem #19 (or any other). Triage creates `problems/<slug>/brief.md`.
 - [ ] Total time is under 30 minutes. Note what slowed you down and add a `Feedback:` line in the handoff.

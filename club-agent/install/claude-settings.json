@@ -1,1 +1,1 @@
-{"permissions":{"deny":["Read(./private-data/**)","Edit(./private-data/**)"]}}
+{"permissions":{"deny":["Read(./private-data/**)","Edit(./private-data/**)","Bash(*private-data*)"]}}

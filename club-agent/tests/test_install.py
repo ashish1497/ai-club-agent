@@ -77,10 +77,13 @@ class TestInstallSh(unittest.TestCase):
         s = json.loads((self.ws / ".claude" / "settings.json").read_text())
         self.assertIn("Read(./private-data/**)", s["permissions"]["deny"])
         self.assertIn("Edit(./private-data/**)", s["permissions"]["deny"])
+        self.assertIn("Bash(*private-data*)", s["permissions"]["deny"])
 
     def test_workspace_claude_md_imports(self):
         self.install()
-        self.assertEqual((self.ws / "CLAUDE.md").read_text().split(), ["@club/AGENTS.md", "@LOCAL.md"])
+        lines = (self.ws / "CLAUDE.md").read_text().splitlines()
+        self.assertEqual(lines[:2], ["@club/AGENTS.md", "@LOCAL.md"])
+        self.assertIn("constitution", "\n".join(lines[2:]))
 
     def test_rerun_preserves_student_files(self):
         self.install()
@@ -141,6 +144,17 @@ class TestInstallPs1(unittest.TestCase):
                     "Re-run the installer after every kit update"]:
             self.assertIn(msg, text + (KIT / "install" / "claude-settings.json").read_text())
 
+    def test_ps1_removes_links_without_recursing(self):
+        text = PS1.read_text()
+        self.assertNotIn("Remove-Item $link -Force -Recurse:$false", text)
+        self.assertIn("[System.IO.Directory]::Delete($link)", text)
+
+    def test_ps1_profile_is_utf8_without_bom(self):
+        text = PS1.read_text()
+        self.assertIn("-Encoding UTF8", text)
+        self.assertIn("[System.Text.UTF8Encoding]::new($false)", text)
+        self.assertNotIn("Set-Content -Path $profilePath", text)
+
     @unittest.skipUnless(shutil.which("pwsh"), "pwsh not installed")
     def test_ps1_parity(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -159,4 +173,6 @@ class TestSetupGuide(unittest.TestCase):
         for h in ["## Before you start", "## Install (macOS)", "## Install (Windows)", "## First session",
                   "## Updating", "## Optional: weekly digest on a schedule", "## Setup buddy checklist"]:
             self.assertIn(h, text)
+        buddy = text.split("## Setup buddy checklist", 1)[1]
+        self.assertIn("constitution", buddy)
         self.assertTrue(has_wao_header(text))

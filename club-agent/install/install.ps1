@@ -40,7 +40,8 @@ $Kit = (Resolve-Path $Kit).Path
 $script:copied = $false
 function New-DirLink([string]$link, [string]$target) {
   $item = Get-Item $link -Force -ErrorAction SilentlyContinue
-  if ($item -and $item.LinkType) { Remove-Item $link -Force -Recurse:$false }
+  # Delete only the link itself, never what it points to (Remove-Item can recurse through junctions on PowerShell 5.1).
+  if ($item -and $item.LinkType) { [System.IO.Directory]::Delete($link) }
   elseif ($item) {
     if (Test-Path (Join-Path $link ".COPIED")) { Remove-Item $link -Recurse -Force }
     else { Fail "$link exists and is not a link; move it aside and re-run" 1 }
@@ -70,9 +71,10 @@ if (-not (Test-Path $settings)) { Copy-Item (Join-Path $Kit "install/claude-sett
 
 # What: create profile.md once. How: literal string replace of the 4 placeholders. Objective: the agent knows who it is talking to.
 if (-not (Test-Path $profilePath)) {
-  $t = Get-Content (Join-Path $Kit "templates/workspace/profile.md") -Raw
+  # Read and write UTF-8 without a BOM: PowerShell 5.1 defaults to ANSI (mangles non-English names), and a BOM would break the --- front matter.
+  $t = Get-Content (Join-Path $Kit "templates/workspace/profile.md") -Raw -Encoding UTF8
   $t = $t.Replace("{{NAME}}", $Name).Replace("{{LEVEL}}", $Level).Replace("{{INTENSITY}}", $Intensity).Replace("{{INTERESTS}}", $Interests)
-  Set-Content -Path $profilePath -Value $t -NoNewline
+  [System.IO.File]::WriteAllText($profilePath, $t, [System.Text.UTF8Encoding]::new($false))
 }
 
 Write-Output "Club Agent workspace ready."

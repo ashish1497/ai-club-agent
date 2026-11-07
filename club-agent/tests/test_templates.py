@@ -82,7 +82,9 @@ class TestTemplates(unittest.TestCase):
             self.assertIn(key, text)
 
     def test_workspace_claude_md_exact(self):
-        self.assertEqual(read("workspace", "CLAUDE.md").strip().splitlines(), ["@club/AGENTS.md", "@LOCAL.md"])
+        lines = read("workspace", "CLAUDE.md").strip().splitlines()
+        self.assertEqual(lines[:2], ["@club/AGENTS.md", "@LOCAL.md"])
+        self.assertIn("constitution", "\n".join(lines[2:]))
 
     def test_codex_stub_points_to_club(self):
         self.assertIn("Before anything else, read club/AGENTS.md, then LOCAL.md. LOCAL.md wins on conflict.",

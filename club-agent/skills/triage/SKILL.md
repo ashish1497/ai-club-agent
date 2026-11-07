@@ -17,7 +17,7 @@ metadata:
    - **Learn a topic**: the member wants understanding. Go to stages 1–2 only.
    - **Mix**: say which parts are which.
    Also say whether this is even an AI problem (F1).
-3. Detect the field(s), for example PPG/biosensing, payments, retail media. For each field with no `domains/<field>.md`, run `domain-pack`.
+3. Name the field(s), for example PPG/biosensing, payments, retail media. Don't research them yet.
 4. Flag risks that apply, each with one line on why:
    - personal or health data
    - money or markets
@@ -26,10 +26,12 @@ metadata:
    - contacting people
    - minors
    Check them against the Hard stops in AGENTS.md. If one applies, stop now.
-5. Make a short kebab-case slug (≤ 5 words) and create `problems/<slug>/` by copying `club/templates/problem/`.
-6. Fill `brief.md` sections `## Statement` (verbatim), `## Type`, `## Fields` and `## Risk flags`.
-7. Set `active_problem: <slug>` in `profile.md`.
-8. Run `log-progress` only if a premise was already corrected. Otherwise hand over to `where-am-i`.
+5. Show the type, fields and risk flags, and ask: "Does this classification match what you want to do?" Adjust until the member agrees.
+6. Make a short kebab-case slug (≤ 5 words) and create `problems/<slug>/` by copying `club/templates/problem/`.
+7. Fill `brief.md` sections `## Statement` (verbatim), `## Type`, `## Fields` and `## Risk flags`.
+8. Set `active_problem: <slug>` in `profile.md`.
+9. Only now, for each field with no `domains/<field>.md`, run `domain-pack`, passing this problem's `<slug>`.
+10. Hand over to `where-am-i`.
 
 ## Output
 - `problems/<slug>/` (all templates copied)

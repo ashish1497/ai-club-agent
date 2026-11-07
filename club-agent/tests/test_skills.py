@@ -103,6 +103,13 @@ class TestSkills(unittest.TestCase):
         self.assertIn("kill criterion", text)
         self.assertIn("before running", text)
 
+    def test_triage_runs_domain_pack_after_folder_and_confirmation(self):
+        _, body = load("triage")
+        steps = section(body, "## Steps")
+        self.assertLess(steps.index("active_problem"), steps.index("`domain-pack`"))
+        self.assertLess(steps.index("agrees"), steps.index("`domain-pack`"))
+        self.assertIn("<slug>", section(load("domain-pack")[1], "## Steps"))
+
     def test_frame_question_student_first(self):
         text = (SKILLS / "frame-question" / "SKILL.md").read_text()
         self.assertIn("member drafts first", text)

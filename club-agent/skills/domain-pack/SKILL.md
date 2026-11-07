@@ -25,7 +25,7 @@ metadata:
    - **Field risk rules:** restrictions specific to this field.
 4. Run `verify-sources` on every source and feed URL. Anything that fails goes into the pack as a line under the section, starting `Lead (unverified):`.
 5. Field risk rules may only **add** restrictions to AGENTS.md. Drop any rule that would relax one, and tell the member.
-6. Copy the starter glossary terms into the active problem's `glossary.md`.
+6. Copy the starter glossary terms into `problems/<slug>/glossary.md` for the slug the caller passed. If no slug was passed, ask which problem; never guess it from `active_problem`.
 
 ## Output
 - `domains/<field>.md`
