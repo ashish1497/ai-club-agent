@@ -5,11 +5,13 @@ metadata:
   origin: custom
   stage: "4"
 ---
+
 **What:** A gate that allows or blocks a planned test or action.
 **How:** Check it against the Hard stops, governance C1–C9, and the field risk rules from the domain packs. Record the decision.
 **Objective:** Members can push hard on frontier problems without harming people or themselves, or breaking the law.
 
 ## Steps
+
 1. Restate the planned action in one line.
 2. **Hard stops** (AGENTS.md): if any applies, the result is **block**. Name the rule and suggest talking to a faculty mentor. Don't offer workarounds that reach the same end.
 3. **Governance**, checked in order:
@@ -24,7 +26,9 @@ metadata:
    - **block** (give the reason and the route: faculty mentor or ethics committee)
 
 ## Output
+
 - `problems/<slug>/log.md`: under `## Milestones`, a row `| <date> | ethics-check: allow|block | <action>; <rules applied>; <conditions> |`
 
 ## Exit check
+
 A decision is recorded. On a block, no part of the blocked action proceeds.

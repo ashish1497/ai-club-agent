@@ -4,5 +4,5 @@
 
 # Bets
 
-| # | Bet (your words) | What would prove it wrong | Status | Evidence / test |
-|---|---|---|---|---|
+| #   | Bet (your words) | What would prove it wrong | Status | Evidence / test |
+| --- | ---------------- | ------------------------- | ------ | --------------- |

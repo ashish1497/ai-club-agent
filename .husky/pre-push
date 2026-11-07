@@ -1,0 +1,4 @@
+# What: Pre-push gate.
+# How: Runs the full repo check: Prettier check, ESLint and kit tests on everything, not just staged files.
+# Objective: Catch anything committed with --no-verify before it leaves the machine.
+npm run check

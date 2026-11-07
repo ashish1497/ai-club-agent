@@ -7,5 +7,5 @@
 Evidence type: human study | animal | bench | simulation | preprint | industry claim | news | opinion
 Confidence: established | contested | unknown
 
-| # | Claim | Source | Evidence type | Confidence | Date |
-|---|---|---|---|---|---|
+| #   | Claim | Source | Evidence type | Confidence | Date |
+| --- | ----- | ------ | ------------- | ---------- | ---- |

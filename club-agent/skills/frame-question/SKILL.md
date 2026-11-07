@@ -5,6 +5,7 @@ metadata:
   origin: custom
   stage: "1"
 ---
+
 **What:** Turn the problem statement into the member's own main question, sub-questions and success definitions.
 **How:** The member drafts first. The agent critiques; it doesn't write.
 **Objective:** Each member's individual angle starts here. A sharp question is worth more than a fast answer.
@@ -12,8 +13,9 @@ metadata:
 Reads intensity from profile.md.
 
 ## Steps
+
 1. Explain the task in two lines: "Rewrite this as 1 main question plus 3–7 sub-questions, then say what would count as an answer and what would count as progress."
-2. The member drafts first. Wait for their draft. At Gentle intensity, you may show a worked example from a *different* field, never this one.
+2. The member drafts first. Wait for their draft. At Gentle intensity, you may show a worked example from a _different_ field, never this one.
 3. Critique the draft against these checks:
    - Is the main question answerable in principle?
    - Do the sub-questions cover it without overlapping?
@@ -24,8 +26,10 @@ Reads intensity from profile.md.
 5. If the member says "just write it", write it, mark it `AI-written`, and ask them to edit one line to make it theirs.
 
 ## Output
+
 - `problems/<slug>/brief.md`: `## My framing`, `## What counts as an answer`, `## What counts as progress`
 - `problems/<slug>/log.md`: milestone `question sharpened`
 
 ## Exit check
+
 The member approves the framing in their own words: "Yes, this is my question."

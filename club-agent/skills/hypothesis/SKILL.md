@@ -6,6 +6,7 @@ metadata:
   stage: "4"
   source: https://github.com/K-Dense-AI/claude-scientific-skills@a25cf9ec00e2745d03f8704acf6f6919694ccd9a
 ---
+
 **What:** Turn the chosen gap into the member's own testable bet.
 **How:** The member writes the bet first. The agent stress-tests it (falsifiable? rivals? already tried?) and records it with a status.
 **Objective:** Each member's own bet is where their uniqueness lives. A bet stated so it can fail is one that can teach.
@@ -15,6 +16,7 @@ _Adapted from K-Dense `hypothesis-generation` (MIT). Its rule that a hypothesis 
 Reads intensity from profile.md.
 
 ## Steps
+
 1. Ask the member to write their bet in one or two sentences, based on `gaps.md ## Gap I chose`. Wait for it. The **member writes the bet first**.
 2. Stress-test it, one question at a time:
    - **Claim type:** descriptive, associational, predictive or causal? Make the wording match.
@@ -28,8 +30,10 @@ Reads intensity from profile.md.
 6. If the member says "just write one", offer 2–3 candidates marked `AI-written` and ask them to pick and reword one.
 
 ## Output
+
 - `problems/<slug>/bets.md` (new row, status `open`)
 - `problems/<slug>/log.md`: milestone `bet written`
 
 ## Exit check
+
 The bet is in the member's words, has a "what would prove it wrong" line, and names at least one rival.

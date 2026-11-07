@@ -5,17 +5,21 @@
 # Brief
 
 ## Statement
+
 <!-- The problem exactly as given. -->
 
 ## Type
+
 <!-- Frontier question | Build task | Learn a topic | mix -->
 
 ## Fields
 
 ## Risk flags
+
 <!-- personal/health data, money/markets, biology/chemistry, scraping, contacting people, minors -->
 
 ## My framing
+
 <!-- Written by you: one main question + 3–7 sub-questions. -->
 
 ## What counts as an answer

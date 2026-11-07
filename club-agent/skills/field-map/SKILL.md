@@ -6,6 +6,7 @@ metadata:
   stage: "2"
   source: https://github.com/K-Dense-AI/claude-scientific-skills@a25cf9ec00e2745d03f8704acf6f6919694ccd9a
 ---
+
 **What:** A lightweight scoping review: what is known, contested and unknown about the member's questions.
 **How:** Search with logged queries, screen the results, extract claims into the field-map table, verify every source, then explain the map at the member's level.
 **Objective:** Get the member to the edge of current knowledge in hours, not weeks, with nothing invented (F5, C1).
@@ -15,6 +16,7 @@ _Adapted from K-Dense `literature-review` (MIT) and the PRISMA-ScR scoping-revie
 Reads intensity from profile.md.
 
 ## Steps
+
 1. **Plan.** From `brief.md`, write 2–4 search strings per sub-question, including synonyms and the field's terms from `glossary.md`. Choose sources from `domains/<field>.md ## Where knowledge lives`, and include preprints.
 2. **Search.** Log every search (date, where, string, result count) in `sources.md ## Search log`. Cap each pass by intensity: **Gentle 8**, **Standard 12**, **Relentless 20** sources.
    - If the member pastes output from a deep-research tool, treat every claim in it as unverified input.
@@ -30,9 +32,11 @@ Reads intensity from profile.md.
 8. **Teach-back.** Ask the member to explain the current state in their own words. Point out gaps, then loop back to step 2 or move on.
 
 ## Output
+
 - `problems/<slug>/field-map.md`
 - `problems/<slug>/sources.md` (search log; verified list via `verify-sources`)
 - `problems/<slug>/log.md`: milestone `field map verified`
 
 ## Exit check
+
 Every row in `field-map.md` traces to a source in `## Verified sources`, and the member's teach-back covers known, contested and unknown.

@@ -1,0 +1,13 @@
+# What: Files Prettier must not touch.
+# How: Same syntax as .gitignore; read by Prettier automatically.
+# Objective: Keep upstream-vendored text and licences byte-identical, and skip generated or tool-owned files.
+node_modules/
+package-lock.json
+.superpowers/
+club-agent/LICENSES/
+club-agent/skills/tdd/
+club-agent/skills/to-spec/
+club-agent/skills/writing-plans/
+club-agent/skills/verification/
+# Template with {{PLACEHOLDERS}} in YAML front matter: Prettier would rewrite them to { { X } }.
+club-agent/templates/workspace/profile.md

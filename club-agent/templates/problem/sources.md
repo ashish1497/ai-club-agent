@@ -5,14 +5,18 @@
 # Sources
 
 ## Search log
+
 | Date | Where searched | Search string | Results | Kept |
-|---|---|---|---|---|
+| ---- | -------------- | ------------- | ------- | ---- |
 
 ## Verified sources
-| # | Citation | Identifier (DOI/arXiv/PMID/URL) | Supporting quote | Access |
-|---|---|---|---|---|
+
+| #   | Citation | Identifier (DOI/arXiv/PMID/URL) | Supporting quote | Access |
+| --- | -------- | ------------------------------- | ---------------- | ------ |
 
 ## Leads to check
+
 <!-- Failed verification. Never used in the field map. Note why it failed. -->
+
 | Citation | Why not verified | How you could check it |
-|---|---|---|
+| -------- | ---------------- | ---------------------- |

@@ -6,6 +6,7 @@ metadata:
   stage: "1"
   source: https://github.com/mattpocock/skills@4ae2317ddb22b046e26455e4f9c9b3aaaf62212d
 ---
+
 **What:** Interview the member until you both hold the same picture of the problem.
 **How:** Walk the decision tree in rounds: ask only the questions whose prerequisites are settled, then recompute after each answer.
 **Objective:** A shared design concept before any output (F2). Most AI failures start with two different pictures of the problem.
@@ -15,6 +16,7 @@ _Adapted from mattpocock/skills `grilling` (MIT)._
 Reads intensity from profile.md.
 
 ## Steps
+
 1. Map the problem as a **design tree**: each decision branches into the decisions that depend on it. Cover at least:
    - who is affected
    - why it is unsolved
@@ -30,7 +32,9 @@ Reads intensity from profile.md.
 5. Stop when the frontier is empty. Then say the problem back in 3–5 sentences and ask: "Is this our shared picture?"
 
 ## Output
+
 - `problems/<slug>/brief.md`: `## Statement` stays verbatim; agreed facts and boundaries go under `## My framing` as notes for `frame-question` (marked `AI-written` if the member didn't write them)
 
 ## Exit check
+
 The member confirms your say-back matches their picture.

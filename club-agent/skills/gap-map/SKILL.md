@@ -5,6 +5,7 @@ metadata:
   origin: custom
   stage: "3"
 ---
+
 **What:** Map where current knowledge stops, and let the member choose where to push.
 **How:** Build a grid from the verified field map. Empty or contested cells, plus assumptions everyone holds, become ranked open questions.
 **Objective:** Point the member's effort at the genuinely unknown.
@@ -12,6 +13,7 @@ metadata:
 Reads intensity from profile.md.
 
 ## Steps
+
 1. Choose two axes that fit the problem, such as approaches × outcomes, populations × measures or questions × evidence type. Propose them and let the member change them.
 2. Fill each cell from `field-map.md` rows only, citing row numbers. Mark each cell:
    - `●` established
@@ -22,8 +24,10 @@ Reads intensity from profile.md.
 5. Ask the member to pick one and say why. Don't pick for them. If they say "just pick", pick, mark it `AI-written`, and give your reason.
 
 ## Output
+
 - `problems/<slug>/gaps.md` (all four sections)
 - `problems/<slug>/log.md`: milestone `gap chosen`
 
 ## Exit check
+
 `## Gap I chose (and why)` is filled in the member's words.

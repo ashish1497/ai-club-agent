@@ -5,4 +5,4 @@
 # Glossary
 
 | Term | Meaning (plain words) | Source |
-|---|---|---|
+| ---- | --------------------- | ------ |

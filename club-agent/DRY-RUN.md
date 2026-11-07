@@ -9,6 +9,7 @@ _Note: spec §14 names a protein problem. The published problem set has no prote
 Setup for each problem: `bash install/install.sh --workspace /tmp/dry-<n> --non-interactive --name Tester --level L3 --interests "<field>"`, then open that folder in the Claude Code tab.
 
 ## Problem #19: Can a wrist sensor track true blood pressure?
+
 Field: PPG / biosensing
 
 - [ ] Stage 0: `triage` classifies it as a Frontier question, creates `problems/<slug>/`, and runs `domain-pack`; risk flags are right (health data is flagged; no medical claims; public datasets only). Pass / Fail. Notes:
@@ -21,6 +22,7 @@ Field: PPG / biosensing
 - [ ] Rules: no invented source anywhere; nothing read from `private-data/`; every file the agent wrote opens with What / How / Objective. Pass / Fail. Notes:
 
 ## Problem #7: Can banks catch mule rings together without pooling customer data?
+
 Field: Fintech
 
 - [ ] Stage 0: `triage` classifies it as a Frontier question, creates `problems/<slug>/`, and runs `domain-pack`; risk flags are right (money/markets and personal data are flagged). Pass / Fail. Notes:
@@ -33,6 +35,7 @@ Field: Fintech
 - [ ] Rules: no invented source anywhere; nothing read from `private-data/`; every file the agent wrote opens with What / How / Objective. Pass / Fail. Notes:
 
 ## Problem #28: How much carbon does crushed rock really remove?
+
 Field: Climate / carbon removal
 
 - [ ] Stage 0: `triage` classifies it as a Frontier question, creates `problems/<slug>/`, and runs `domain-pack`; risk flags are right (no special risk flags expected beyond C1). Pass / Fail. Notes:
@@ -47,7 +50,7 @@ Field: Climate / carbon removal
 ## Result
 
 | Problem | Stages passed | Blocking issues |
-|---|---|---|
-| #19 | /6 | |
-| #7 | /6 | |
-| #28 | /6 | |
+| ------- | ------------- | --------------- |
+| #19     | /6            |                 |
+| #7      | /6            |                 |
+| #28     | /6            |                 |

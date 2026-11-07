@@ -1,0 +1,32 @@
+{
+  "name": "ai-club-agent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Club thinking agent: Claude Code kit (constitution, skills, templates, installers) and open domain-pack library.",
+  "type": "module",
+  "scripts": {
+    "prepare": "husky",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "cd club-agent && python3 -m unittest discover -s tests",
+    "check": "npm run format:check && npm run lint && npm test"
+  },
+  "lint-staged": {
+    "*.{md,js,mjs}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,yml,yaml}": "prettier --write"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@eslint/markdown": "^8.0.3",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.9.10"
+  }
+}

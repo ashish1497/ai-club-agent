@@ -37,7 +37,9 @@ class TestTemplates(unittest.TestCase):
             self.assertTrue(has_wao_header(p.read_text()), p)
 
     def test_field_map_header_exact(self):
-        self.assertIn("| # | Claim | Source | Evidence type | Confidence | Date |", read("problem", "field-map.md"))
+        rows = [[c.strip() for c in line.strip().strip("|").split("|")]
+                for line in read("problem", "field-map.md").splitlines() if line.strip().startswith("|")]
+        self.assertIn(["#", "Claim", "Source", "Evidence type", "Confidence", "Date"], rows)
 
     def test_field_map_lists_evidence_types_and_confidence(self):
         text = read("problem", "field-map.md")

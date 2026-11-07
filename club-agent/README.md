@@ -6,13 +6,13 @@
 
 ## What is in here
 
-| Path | What it is |
-|---|---|
+| Path              | What it is                                                           |
+| ----------------- | -------------------------------------------------------------------- |
 | `FUNDAMENTALS.md` | The 11 fundamentals: a one-page guide you can read without the agent |
-| `AGENTS.md` | The constitution the agent always follows |
-| `skills/` | The 20 thinking moves (triage, field-map, hypothesis, …) |
-| `templates/` | Blank versions of every file in your workspace |
-| `install/` | Installers and the setup guide |
+| `AGENTS.md`       | The constitution the agent always follows                            |
+| `skills/`         | The 20 thinking moves (triage, field-map, hypothesis, …)             |
+| `templates/`      | Blank versions of every file in your workspace                       |
+| `install/`        | Installers and the setup guide                                       |
 
 ## Install
 

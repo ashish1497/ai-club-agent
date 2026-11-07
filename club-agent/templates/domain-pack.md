@@ -9,6 +9,7 @@
 ## Data to test with
 
 ## Who decides
+
 <!-- regulators, standards bodies -->
 
 ## Connectors
@@ -18,4 +19,5 @@
 ## Starter glossary
 
 ## Field risk rules
+
 <!-- May only ADD restrictions to the core rules. -->

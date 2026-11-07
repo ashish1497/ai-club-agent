@@ -5,10 +5,13 @@
 # Log
 
 ## Milestones
+
 <!-- Types: question sharpened, premise corrected, field map verified, gap chosen, bet written,
      bet killed, dataset found, test run, expert spoken to, prototype built -->
+
 | Date | Milestone | Note |
-|---|---|---|
+| ---- | --------- | ---- |
 
 ## Handoffs
+
 <!-- Date · done · next · open questions · tool/model used · optional "Feedback:" line -->
