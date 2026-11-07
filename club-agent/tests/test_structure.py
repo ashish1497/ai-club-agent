@@ -45,6 +45,15 @@ class TestStructure(unittest.TestCase):
         self.assertEqual(set(ORIGIN), set(EXPECTED_SKILLS))
         self.assertEqual(set(ORIGIN.values()), {"custom", "adapted", "vendored"})
 
+    def test_dry_run_covers_three_fields(self):
+        text = (KIT / "DRY-RUN.md").read_text()
+        self.assertTrue(has_wao_header(text))
+        for problem in ["#19", "#7", "#28"]:
+            self.assertIn(problem, text)
+            block = text.split(f"## Problem {problem}", 1)[1].split("## Problem", 1)[0]
+            for stage in range(6):
+                self.assertRegex(block, rf"(?m)^- \[ \] Stage {stage}\b", f"{problem} stage {stage}")
+
 
 if __name__ == "__main__":
     unittest.main()
