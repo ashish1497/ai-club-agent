@@ -110,6 +110,11 @@ class TestSkills(unittest.TestCase):
         self.assertLess(steps.index("agrees"), steps.index("`domain-pack`"))
         self.assertIn("<slug>", section(load("domain-pack")[1], "## Steps"))
 
+    def test_triage_loads_club_problem_by_number(self):
+        steps = section(load("triage")[1], "## Steps")
+        self.assertIn("club/problems/", steps)
+        self.assertIn("start problem", steps)
+
     def test_frame_question_student_first(self):
         text = (SKILLS / "frame-question" / "SKILL.md").read_text()
         self.assertIn("member drafts first", text)

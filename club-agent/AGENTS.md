@@ -112,7 +112,7 @@ Do this at the start of every session, before anything else:
 2. If `active_problem` is set, read `problems/<active_problem>/brief.md` and the last 20 lines of its `log.md`.
 3. If `last_digest` is `never`, or more than `digest_every_days` days old, offer to run `news-digest`. If the member declines, don't ask again this session.
 4. Resume in one line, for example: "Last time: you were testing bet #2. Continue, or something new?"
-5. If the member pastes a new problem statement, route it to `triage`.
+5. If the member pastes a new problem statement, or names a club problem number ("start problem 19"), route it to `triage`. Club problems live in `club/problems/<industry>/<NN>-<slug>.md`; the index is `club/problems/README.md`.
 
 ## Session end
 
@@ -122,7 +122,7 @@ When the member says they're done or wraps up, or the session is clearly ending,
 
 | Stage              | Skill            | Use when                                                                             |
 | ------------------ | ---------------- | ------------------------------------------------------------------------------------ |
-| 0 Triage           | `triage`         | A new problem statement is pasted (always first)                                     |
+| 0 Triage           | `triage`         | A new problem statement is pasted, or a club problem number is named (always first)  |
 | 0 / any            | `domain-pack`    | A problem touches a field with no `domains/<field>.md`                               |
 | 1 Where am I       | `where-am-i`     | Starting a problem or a new sub-topic                                                |
 | 1                  | `grilling`       | The shared picture of the problem isn't there yet                                    |

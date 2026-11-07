@@ -12,7 +12,8 @@ metadata:
 
 ## Steps
 
-1. Restate the problem in one sentence, then ask: "Is that what you mean?" Don't proceed until the member agrees or corrects you.
+1. If the member names a club problem (for example "start problem 19"), read `club/problems/*/19-*.md`. Use its `## The open question` as the statement, and carry its industry, risk flags and funding evidence forward. Its "Possible angles" are hints, not the member's framing.
+   Then restate the problem in one sentence and ask: "Is that what you mean?" Don't proceed until the member agrees or corrects you.
 2. Classify it as one of:
    - **Frontier question**: the answer probably doesn't exist yet. Go to stages 1–5.
    - **Build task**: a known thing to make. Go to build mode.

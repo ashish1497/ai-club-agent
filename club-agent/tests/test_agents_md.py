@@ -57,6 +57,11 @@ class TestAgentsMd(unittest.TestCase):
         for s in EXPECTED_SKILLS:
             self.assertIn(f"`{s}`", routing, s)
 
+    def test_routing_triage_accepts_club_problem_number(self):
+        routing = section(self.text, "## Routing")
+        self.assertIn("club problem number", routing)
+        self.assertIn("club/problems/", self.text)
+
     def test_agents_md_handles_missing_profile(self):
         ss = section(self.text, "## Session start")
         self.assertIn("profile.md is missing or incomplete", ss)
