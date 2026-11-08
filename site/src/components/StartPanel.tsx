@@ -24,7 +24,7 @@ export function StartPanel({ id }: { id: string }) {
       </pre>
       <div className="start-actions">
         <CopyButton text={cmd} />
-        <Link className="btn btn--sm" href="/start/">
+        <Link className="btn" href="/start/">
           Setup guide
         </Link>
       </div>

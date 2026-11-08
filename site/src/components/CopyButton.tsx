@@ -16,7 +16,7 @@ export function CopyButton({ text, className }: { text: string; className?: stri
     }
   }
   return (
-    <button type="button" className={className ?? "btn btn--primary btn--sm"} onClick={copy} aria-live="polite">
+    <button type="button" className={className ?? "btn btn--primary"} onClick={copy} aria-live="polite">
       {done ? "Copied" : "Copy"}
     </button>
   );

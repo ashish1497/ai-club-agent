@@ -57,6 +57,12 @@ jobs:
       - name: Verify the export (pages present, no runtime DiceBear calls)
         run: npm --prefix site exec vitest run tests/build.test.ts
 
+      - name: Install the test browser
+        run: npm --prefix site exec playwright install --with-deps chromium
+
+      - name: Smoke, sanity and regression tests (phone, tablet, desktop)
+        run: npm run site:e2e
+
       # Deploys the already-built, already-tested static folder. No build runs on Vercel,
       # so the Vercel project needs no root directory or framework settings.
       - name: Deploy to production

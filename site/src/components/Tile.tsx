@@ -9,8 +9,13 @@ import { Mascot } from "./Mascot";
 export function Tile({ industry, count, variant }: { industry: Industry; count: number; variant?: "big" | "wide" }) {
   const style = { "--tc": `var(${industry.colorVar})` } as CSSProperties;
   return (
-    <Link href={`/worlds/${industry.slug}/`} className={`tile${variant ? ` tile--${variant}` : ""}`} style={style}>
-      <span className="count" aria-label={`${count} problems`}>
+    <Link
+      href={`/worlds/${industry.slug}/`}
+      className={`tile${variant ? ` tile--${variant}` : ""}`}
+      style={style}
+      aria-label={`${industry.name}, ${count} ${count === 1 ? "problem" : "problems"}. ${industry.joke}`}
+    >
+      <span className="count" aria-hidden="true">
         {count}
       </span>
       {variant !== "big" && <Mascot seed={industry.seed} size={56} />}

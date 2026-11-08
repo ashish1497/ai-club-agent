@@ -1,4 +1,4 @@
 # What: Pre-push gate.
-# How: Runs the full repo check: Prettier check, ESLint and kit tests on everything, not just staged files.
-# Objective: Catch anything committed with --no-verify before it leaves the machine.
-npm run check
+# How: Full verification: format, lint, kit + site unit tests, static build, then Playwright smoke, sanity and regression suites in a real browser.
+# Objective: Nothing reaches the shared repo with a broken page, flow or layout rule.
+npm run verify

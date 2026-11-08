@@ -16,3 +16,5 @@ site/.next/
 site/out/
 site/next-env.d.ts
 site/package-lock.json
+site/test-results/
+site/playwright-report/

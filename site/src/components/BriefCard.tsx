@@ -30,7 +30,7 @@ export function BriefCard({ p, peeked }: { p: Brief; peeked: boolean }) {
         <Link className="peek" href={`/problems/${p.id}/`} aria-hidden="true" tabIndex={-1}>
           Read the whole thing
         </Link>
-        <Link className="btn btn--primary btn--sm" href={`/problems/${p.id}/`}>
+        <Link className="btn btn--primary" href={`/problems/${p.id}/`}>
           I&apos;m curious
         </Link>
       </div>

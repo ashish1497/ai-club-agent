@@ -45,6 +45,9 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --dur: 180ms;
   --container: 1240px;
+  /* Control size system: every button is --control-h, every selector (pill, tab, filter chip) is --selector-h. */
+  --control-h: 48px;
+  --selector-h: 44px;
   --gutter: 18px;
 }
 
@@ -158,7 +161,7 @@ mark {
   box-shadow: inset 0 0 0 1px var(--rule);
   color: var(--ink);
   text-decoration: none;
-  min-height: 44px;
+  height: var(--selector-h);
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
@@ -174,11 +177,14 @@ a.pill:hover {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 52px;
-  padding: 0 22px;
+  height: var(--control-h);
+  padding: 0 20px;
   border: 0;
   border-radius: var(--radius-stock);
-  font: 600 16px var(--font);
+  font: 600 16px/1 var(--font);
+  white-space: nowrap;
+  flex: 0 0 auto;
+  align-self: center;
   color: var(--ink);
   text-decoration: none;
   cursor: pointer;
@@ -205,11 +211,7 @@ a.pill:hover {
     2px calc(var(--edge-h) + 4px) 12px -4px oklch(20% 0.014 255 / 0.3);
   transition-timing-function: var(--ease-spring);
 }
-.btn--sm {
-  min-height: 44px;
-  padding: 0 16px;
-  font-size: 15px;
-}
+
 .btn--ink {
   background: var(--ink);
   color: var(--paper);
@@ -388,8 +390,9 @@ a.pill:hover {
 button.chip {
   border: 0;
   cursor: pointer;
-  min-height: 44px;
+  height: var(--selector-h);
   padding: 0 14px;
+  font-size: 14px;
 }
 button.chip[aria-pressed="true"] {
   background: var(--ink);
@@ -441,6 +444,11 @@ button.chip[aria-pressed="true"] {
 }
 .hero-actions .btn--primary {
   flex: 1 1 180px;
+}
+.hero-actions,
+.brief-row,
+.start-actions {
+  align-items: center;
 }
 .counts {
   display: grid;
@@ -704,7 +712,7 @@ button.chip[aria-pressed="true"] {
   flex: 0 0 auto;
   font: 600 14px var(--font);
   padding: 0 14px;
-  min-height: 44px;
+  height: var(--selector-h);
   display: inline-flex;
   align-items: center;
   border-radius: 12px;
@@ -855,11 +863,13 @@ button.chip[aria-pressed="true"] {
 }
 .js .dock {
   display: flex;
+  align-items: center;
+  align-self: start;
   gap: 10px;
   margin-top: 18px;
 }
 .js .dock .btn--primary {
-  flex: 1;
+  flex: 1 1 auto;
 }
 .btn:disabled {
   opacity: 0.45;
@@ -900,7 +910,7 @@ button.chip[aria-pressed="true"] {
   margin-top: 12px;
 }
 .start-actions .btn {
-  flex: 1;
+  flex: 1 1 0;
 }
 .start-note {
   font: 500 13px/1.45 var(--font);

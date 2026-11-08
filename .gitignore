@@ -9,3 +9,6 @@ site/node_modules/
 *.tsbuildinfo
 site/.vercel/
 .vercel/
+site/test-results/
+site/playwright-report/
+site/blob-report/

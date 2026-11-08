@@ -12,7 +12,17 @@ From the repo root:
 - `npm run site:dev`: dev server at http://localhost:3000.
 - `npm run site:build`: static export to `site/out/`.
 - `npm run site:test`: unit tests, plus checks on the export when `site/out` exists.
-- `npm run check`: format, lint, kit tests and site tests (this runs on pre-push and in CI).
+- `npm run check`: format, lint, kit tests and site unit tests (runs on every commit).
+- `npm run site:e2e`: Playwright smoke, sanity and regression suites against the built site at phone, tablet and desktop sizes. Locally it uses your installed Chrome; in CI it installs Chromium.
+- `npm run verify`: everything above plus a fresh build. Runs before every push and in CI.
+
+### What the browser suites cover
+
+| Suite                                 | What it checks                                                                                                                                                                                                            |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Smoke (`e2e/smoke.spec.ts`)           | Every page (landing, start, every world, every problem) returns 200, has a heading and title, and logs no script errors or missing assets.                                                                                |
+| Sanity (`e2e/sanity.spec.ts`)         | The member journeys: landing to world to problem to bites to "Start it"; filters narrow, clear and persist; deep links; save and peek counter; Surprise me; copy; keyboard; storage blocked; JavaScript off; setup guide. |
+| Regression (`e2e/regression.spec.ts`) | The control size system (every button 48px with 16px text, every pill, tab and filter chip 44px), no button stretching in a row, and no horizontal overflow, on the key pages at all three sizes.                         |
 
 ## Content
 

@@ -20,7 +20,9 @@
     "test": "npm run kit:test && npm run site:test",
     "site:dev": "npm --prefix site run dev",
     "site:build": "npm --prefix site run build",
-    "check": "npm run format:check && npm run lint && npm test"
+    "check": "npm run format:check && npm run lint && npm test",
+    "site:e2e": "npm --prefix site run e2e",
+    "verify": "npm run check && npm run site:build && npm run site:test && npm run site:e2e"
   },
   "lint-staged": {
     "*.{md,js,mjs,ts,tsx}": [
