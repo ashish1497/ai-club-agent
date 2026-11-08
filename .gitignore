@@ -12,3 +12,4 @@ site/.vercel/
 site/test-results/
 site/playwright-report/
 site/blob-report/
+site/.env*.local
