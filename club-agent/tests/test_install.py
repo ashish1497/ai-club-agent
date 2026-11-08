@@ -82,8 +82,38 @@ class TestInstallSh(unittest.TestCase):
     def test_workspace_claude_md_imports(self):
         self.install()
         lines = (self.ws / "CLAUDE.md").read_text().splitlines()
-        self.assertEqual(lines[:2], ["@club/AGENTS.md", "@LOCAL.md"])
+        self.assertEqual(lines[:2], ["@CLUB-RULES.md", "@LOCAL.md"])
         self.assertIn("constitution", "\n".join(lines[2:]))
+
+    # What: the rulebook is a real file inside the workspace, not a link out of it.
+    # How: compare CLUB-RULES.md with the kit's AGENTS.md and check it is not a symlink.
+    # Objective: Claude Code loads it with no "external import" approval dialog.
+    def test_rulebook_copied_into_workspace(self):
+        self.install()
+        rules = self.ws / "CLUB-RULES.md"
+        self.assertTrue(rules.is_file())
+        self.assertFalse(rules.is_symlink())
+        text = rules.read_text()
+        self.assertIn("re-run the installer", text.split("# Club Agent: Constitution", 1)[0])
+        self.assertTrue(text.endswith((KIT / "AGENTS.md").read_text()))
+
+    def test_rerun_refreshes_rulebook(self):
+        self.install()
+        (self.ws / "CLUB-RULES.md").write_text("stale")
+        self.install()
+        self.assertIn("# Club Agent: Constitution", (self.ws / "CLUB-RULES.md").read_text())
+
+    def test_rerun_migrates_old_external_import(self):
+        self.ws.mkdir(parents=True)
+        (self.ws / "CLAUDE.md").write_text("@club/AGENTS.md\n@LOCAL.md\n\nMy own note.\n")
+        (self.ws / "AGENTS.md").write_text(
+            "Before anything else, read club/AGENTS.md, then LOCAL.md. LOCAL.md wins on conflict.\n")
+        self.install()
+        claude = (self.ws / "CLAUDE.md").read_text()
+        self.assertEqual(claude.splitlines()[:2], ["@CLUB-RULES.md", "@LOCAL.md"])
+        self.assertIn("My own note.", claude)
+        self.assertNotIn("@club/AGENTS.md", claude)
+        self.assertIn("read CLUB-RULES.md, then LOCAL.md", (self.ws / "AGENTS.md").read_text())
 
     def test_rerun_preserves_student_files(self):
         self.install()
@@ -193,6 +223,11 @@ class TestInstallPs1(unittest.TestCase):
         self.assertIn("Where should your research folder go? Press Enter for ~/my-research", text)
         self.assertIn("Where should your research folder go? Press Enter for ~/my-research", SH.read_text())
         self.assertIn("$PSBoundParameters.ContainsKey('Workspace')", text)
+
+    def test_ps1_copies_rulebook_and_migrates_import(self):
+        text = PS1.read_text()
+        self.assertIn("CLUB-RULES.md", text)
+        self.assertIn("@club/AGENTS.md", text)
 
     def test_ps1_removes_links_without_recursing(self):
         text = PS1.read_text()

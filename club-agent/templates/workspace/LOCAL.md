@@ -1,5 +1,5 @@
 <!-- What: Your own rules: overrides of, and additions to, the club constitution. -->
-<!-- How: The agent loads this file last (CLAUDE.md imports club/AGENTS.md first, then this), so anything here wins. -->
+<!-- How: The agent loads this file last (CLAUDE.md imports CLUB-RULES.md first, then this), so anything here wins. -->
 <!-- Objective: The tool is yours. Change how it behaves without editing club files, so updates never conflict. -->
 
 # My rules

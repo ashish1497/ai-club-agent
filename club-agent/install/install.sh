@@ -83,6 +83,17 @@ done
 for f in AGENTS.md CLAUDE.md LOCAL.md watchlist.md; do
   [ -e "$WS/$f" ] || cp "$KIT/templates/workspace/$f" "$WS/$f"
 done
+# What: copy the club rulebook into the workspace on every run, and point older workspaces at the copy.
+# How: CLUB-RULES.md = a do-not-edit header + the kit's AGENTS.md; exact-line rewrites of the old @club/AGENTS.md import.
+# Objective: the rulebook lives inside the workspace, so Claude Code loads it with no "external import" approval dialog.
+{ printf '%s\n\n' "<!-- Copied from club/AGENTS.md by the installer. Do not edit: after git pull, re-run the installer to update it. Put your own rules in LOCAL.md. -->"; cat "$KIT/AGENTS.md"; } > "$WS/CLUB-RULES.md"
+for f in CLAUDE.md AGENTS.md; do
+  [ -f "$WS/$f" ] || continue
+  sed -e 's|^@club/AGENTS\.md$|@CLUB-RULES.md|' \
+      -e 's|read club/AGENTS\.md, then LOCAL\.md|read CLUB-RULES.md, then LOCAL.md|' \
+      -e 's| and approve the import of club/AGENTS\.md if asked\.|.|' "$WS/$f" > "$WS/$f.tmp"
+  if cmp -s "$WS/$f" "$WS/$f.tmp"; then rm "$WS/$f.tmp"; else mv "$WS/$f.tmp" "$WS/$f"; fi
+done
 [ -e "$WS/.claude/settings.json" ] || cp "$KIT/install/claude-settings.json" "$WS/.claude/settings.json"
 
 # What: create profile.md once. How: bash string substitution (safe for any characters in answers). Objective: the agent knows who it is talking to.

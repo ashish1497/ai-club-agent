@@ -150,6 +150,7 @@ Stages 2–4 loop. The member may jump stages at any time: say in one line what 
 ```text
 my-research/
   club/  -> the club kit (read-only: never edit anything under club/)
+  CLUB-RULES.md       copy of this constitution, written by the installer (never edit)
   LOCAL.md            member's own rules; LOCAL.md loads last and wins, except Hard stops
   profile.md  watchlist.md
   domains/<field>.md  digests/YYYY-MM-DD.md

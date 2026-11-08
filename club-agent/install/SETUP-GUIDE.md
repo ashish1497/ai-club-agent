@@ -32,7 +32,7 @@ The kit is downloaded into a folder called `ai-club-agent` in your home folder. 
    5. **Intensity:** press Enter to take the default for your level, or type `gentle`, `standard` or `relentless`.
 4. **Check that it worked.** The last lines should say `Club Agent workspace ready.` and `Open this folder in Claude Code:` followed by your research folder's path.
 
-Running step 3 again is safe. It never overwrites your files, and it won't ask the questions again.
+Running step 3 again is safe. It never overwrites your files, and it only asks for the folder again (press Enter if you used the default).
 
 ## Install (Windows)
 
@@ -49,9 +49,8 @@ If Windows doesn't allow links, the installer copies the kit instead and tells y
 
 1. Open the **Claude desktop app** and click the **Code** tab.
 2. Choose a folder: pick your research folder (**`my-research`** in your home folder, unless you chose another one). Don't pick `ai-club-agent`.
-3. If Claude Code asks whether to allow importing `club/AGENTS.md` (an "external import"), click **Allow**. That file is the agent's rulebook.
-4. Say `hi`. The agent greets you by name and checks that everything is set up.
-5. Pick a problem:
+3. Say `hi`. The agent greets you by name and checks that everything is set up.
+4. Pick a problem:
    - **A club problem:** browse them on the club website, then type `start problem 07`, using the problem's number.
    - **Your own problem:** paste the problem statement.
 
@@ -64,21 +63,23 @@ If Windows doesn't allow links, the installer copies the kit instead and tells y
 
    It asks you questions. That's the point, so answer in your own words.
 
-6. When you stop, type `wrap up`. The agent saves a handoff note in the problem's `log.md`, and next time it picks up where you left off.
+5. When you stop, type `wrap up`. The agent saves a handoff note in the problem's `log.md`, and next time it picks up where you left off.
 
 Things to know:
 
 - Put any raw personal or health data (for example, your own sensor readings) in `my-research/private-data/`. The agent is blocked from reading it.
-- To change how the agent behaves for you, edit `my-research/LOCAL.md`. Never edit anything inside `club` or `ai-club-agent`.
+- To change how the agent behaves for you, edit `my-research/LOCAL.md`. Never edit `CLUB-RULES.md` (the installer replaces it) or anything inside `club` or `ai-club-agent`.
 
 ## Updating
 
 When the club announces an update, get it like this:
 
-- **macOS:** in Terminal, run `cd ~/ai-club-agent && git pull`
-- **Windows:** in PowerShell, run `cd $HOME\ai-club-agent; git pull`. If the installer copied the kit, run install step 3 again.
+1. Download the update:
+   - **macOS:** in Terminal, run `cd ~/ai-club-agent && git pull`
+   - **Windows:** in PowerShell, run `cd $HOME\ai-club-agent; git pull`
+2. Run install step 3 again, and give the same folder as before. This refreshes `CLUB-RULES.md`, the agent's rulebook in your research folder.
 
-Your `my-research` files are never touched. Check `CHANGELOG.md` for anything you need to do.
+Your own files are never touched. Check `CHANGELOG.md` for anything you need to do.
 
 ## Optional: weekly digest on a schedule
 
@@ -88,23 +89,23 @@ Optional connectors make research faster, but none are required. In Claude Code,
 
 ## Something went wrong?
 
-| What you see                                      | What to do                                                                                                                 |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `git: command not found`                          | git isn't installed. Go back to "Before you start".                                                                        |
-| `destination path 'ai-club-agent' already exists` | You already downloaded the kit. Skip to step 3.                                                                            |
-| `No such file or directory` on step 3             | Copy the step 3 line again exactly as written. The path has `club-agent` twice: `ai-club-agent/club-agent/install`.        |
-| `level must be L1-L5`                             | Type the level as a capital L and a number, for example `L3`, then run step 3 again.                                       |
-| The agent doesn't greet you by name               | You opened the wrong folder. In the Code tab, choose `my-research`, not `ai-club-agent`.                                   |
-| The agent says it can't see the constitution      | Run install step 3 again, start a new session, and click **Allow** when Claude Code asks about importing `club/AGENTS.md`. |
+| What you see                                      | What to do                                                                                                          |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `git: command not found`                          | git isn't installed. Go back to "Before you start".                                                                 |
+| `destination path 'ai-club-agent' already exists` | You already downloaded the kit. Skip to step 3.                                                                     |
+| `No such file or directory` on step 3             | Copy the step 3 line again exactly as written. The path has `club-agent` twice: `ai-club-agent/club-agent/install`. |
+| `level must be L1-L5`                             | Type the level as a capital L and a number, for example `L3`, then run step 3 again.                                |
+| The agent doesn't greet you by name               | You opened the wrong folder. In the Code tab, choose `my-research`, not `ai-club-agent`.                            |
+| The agent says it can't see the constitution      | Run install step 3 again, then start a new session.                                                                 |
 
 ## Setup buddy checklist
 
 - [ ] `git --version` works.
 - [ ] The kit is cloned. `ls ~/ai-club-agent/club-agent/skills` shows 20 folders.
 - [ ] The installer ran and printed "Open this folder in Claude Code".
-- [ ] `my-research/club` opens the kit, and `my-research/.claude/skills/triage/SKILL.md` exists.
+- [ ] `my-research/CLUB-RULES.md` starts with a "Copied from club/AGENTS.md" note, `my-research/club` opens the kit, and `my-research/.claude/skills/triage/SKILL.md` exists.
 - [ ] `my-research/profile.md` has a name, level, intensity and interests.
 - [ ] In the Code tab, with `my-research` open, the agent greets the member by name.
-- [ ] Ask the agent: "Quote the title of your constitution." It must answer "Club Agent: Constitution". If it doesn't, approve the `club/AGENTS.md` import when Claude Code asks, then restart the session.
+- [ ] Ask the agent: "Quote the title of your constitution." It must answer "Club Agent: Constitution". If it doesn't, check that `my-research/CLAUDE.md` starts with `@CLUB-RULES.md`, re-run the installer, then restart the session.
 - [ ] Type `start problem 19` (or any other number). Triage creates `problems/<slug>/brief.md`.
 - [ ] Total time is under 30 minutes. Note what slowed you down and add a `Feedback:` line in the handoff.

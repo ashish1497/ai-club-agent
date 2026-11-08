@@ -77,6 +77,23 @@ foreach ($f in @("AGENTS.md", "CLAUDE.md", "LOCAL.md", "watchlist.md")) {
   $dest = Join-Path $Workspace $f
   if (-not (Test-Path $dest)) { Copy-Item (Join-Path $Kit "templates/workspace/$f") $dest }
 }
+# What: copy the club rulebook into the workspace on every run, and point older workspaces at the copy.
+# How: CLUB-RULES.md = a do-not-edit header + the kit's AGENTS.md (UTF-8, no BOM); literal rewrites of the old @club/AGENTS.md import.
+# Objective: the rulebook lives inside the workspace, so Claude Code loads it with no "external import" approval dialog. Parity with install.sh.
+$utf8 = [System.Text.UTF8Encoding]::new($false)
+$header = "<!-- Copied from club/AGENTS.md by the installer. Do not edit: after git pull, re-run the installer to update it. Put your own rules in LOCAL.md. -->`n`n"
+$rules = [System.IO.File]::ReadAllText((Join-Path $Kit "AGENTS.md"), $utf8)
+[System.IO.File]::WriteAllText((Join-Path $Workspace "CLUB-RULES.md"), $header + $rules, $utf8)
+foreach ($f in @("CLAUDE.md", "AGENTS.md")) {
+  $path = Join-Path $Workspace $f
+  if (-not (Test-Path $path)) { continue }
+  $old = [System.IO.File]::ReadAllText($path, $utf8)
+  $new = $old -replace '(?m)^@club/AGENTS\.md(\r?)$', '@CLUB-RULES.md$1'
+  $new = $new.Replace("read club/AGENTS.md, then LOCAL.md", "read CLUB-RULES.md, then LOCAL.md")
+  $new = $new.Replace(" and approve the import of club/AGENTS.md if asked.", ".")
+  if ($new -ne $old) { [System.IO.File]::WriteAllText($path, $new, $utf8) }
+}
+
 $settings = Join-Path $Workspace ".claude/settings.json"
 if (-not (Test-Path $settings)) { Copy-Item (Join-Path $Kit "install/claude-settings.json") $settings }
 
