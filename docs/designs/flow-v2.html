@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Club problems: flow mockup v2</title>
+<link href="https://api.fontshare.com/v2/css?f[]=chillax@500,600,700&display=swap" rel="stylesheet">
+<style>
+/* Mockup only. Direction: Hum (cut paper, card stock) + glossy bento sheen + DiceBear croodles. */
+:root{
+  --paper:oklch(97% .012 95);--paper-2:oklch(94.5% .018 95);--paper-3:oklch(91% .022 95);
+  --ink:oklch(20% .014 255);--ink-2:oklch(29% .014 255);--muted:oklch(47% .014 255);--rule:oklch(87% .016 95);
+  --pear:oklch(87% .175 96);--pear-deep:oklch(72% .16 92);--blue:oklch(50% .17 250);--coral:oklch(70% .2 22);
+  --mint:oklch(82% .15 152);--mint-deep:oklch(48% .12 155);--card:oklch(98.8% .007 95);--edge:oklch(83% .04 88);
+  --kraft:oklch(63% .085 62);--sugar:oklch(89% .035 236);
+  --t-fin:oklch(86% .12 160);--t-health:oklch(86% .09 15);--t-front:oklch(84% .09 280);--t-saas:oklch(90% .13 95);
+  --t-ecom:oklch(86% .1 230);--t-mkt:oklch(85% .12 40);--t-log:oklch(88% .08 130);--t-ed:oklch(87% .09 320);
+  --t-re:oklch(86% .06 70);--t-legal:oklch(85% .05 250);
+  --font:"Chillax",ui-rounded,system-ui,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.15 0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --shine:linear-gradient(155deg,oklch(100% 0 0 / .75) 0%,oklch(100% 0 0 / .18) 28%,oklch(100% 0 0 / 0) 46%);
+  --shadow:0 1px 2px oklch(20% .014 255 / .07),0 14px 30px -16px oklch(20% .014 255 / .35);
+}
+*{box-sizing:border-box}
+html,body{overflow-x:clip;margin:0}
+body{background:oklch(88% .02 95);font-family:var(--font);color:var(--ink);padding:32px 20px 60px}
+.intro{max-width:1100px;margin:0 auto 26px}
+.intro h1{font:600 26px/1.15 var(--font);margin:0 0 6px;letter-spacing:-.02em}
+.intro p{margin:0;color:var(--muted);font-size:15px;max-width:760px;line-height:1.5}
+.rail{display:flex;gap:26px;overflow-x:auto;padding:8px 4px 24px;scroll-snap-type:x mandatory;max-width:100%}
+.step{flex:0 0 auto;scroll-snap-align:start}
+.cap{font:600 14px var(--font);margin:0 0 10px 6px}
+.cap span{color:var(--muted);font-weight:500}
+.phone{width:375px;height:780px;border-radius:44px;background:var(--grain),var(--paper);box-shadow:0 0 0 10px oklch(18% .01 255),0 30px 60px -20px oklch(20% .014 255 / .5);overflow:hidden;position:relative;display:flex;flex-direction:column}
+.status{height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 26px;font:600 13px var(--font)}
+.scroll{flex:1;overflow:hidden;padding:0 18px 18px}
+.top{display:flex;justify-content:space-between;align-items:center;margin:4px 0 14px}
+.logo{font:700 17px var(--font);letter-spacing:-.02em}
+.logo b{background:var(--pear);padding:0 6px;border-radius:8px}
+.pill{font:500 13px var(--font);padding:7px 12px;border-radius:999px;background:var(--card);box-shadow:inset 0 0 0 1px var(--rule)}
+h2{font:600 34px/1.02 var(--font);letter-spacing:-.03em;margin:0}
+h3{font:600 22px/1.08 var(--font);letter-spacing:-.025em;margin:0}
+p{margin:0}
+.lede{font:500 16px/1.45 var(--font);color:var(--ink-2);margin-top:10px}
+mark{background:color-mix(in oklab,var(--pear) 70%,transparent);color:inherit;padding:0 3px;border-radius:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 20px;border:0;border-radius:16px;font:600 16px var(--font);color:var(--ink);background:var(--shine),var(--grain),var(--card);box-shadow:inset 0 0 0 1px var(--rule),0 5px 0 0 var(--edge);cursor:pointer}
+.btn.primary{background:var(--shine),var(--grain),var(--pear);box-shadow:0 5px 0 0 var(--pear-deep),2px 9px 12px -4px oklch(20% .014 255 / .3)}
+.btn.ink{background:var(--ink);color:var(--paper);box-shadow:0 5px 0 0 oklch(10% .01 255)}
+.btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.sticker{position:absolute;background:var(--coral);color:oklch(99% 0 0);font:600 13px/1.15 var(--font);padding:12px 14px;border-radius:999px;transform:rotate(8deg);box-shadow:var(--shadow);text-align:center}
+.sticker.round{width:96px;height:96px;display:flex;align-items:center;justify-content:center;padding:10px}
+.torn{position:relative;margin:0 -18px;padding:22px 18px 26px;background:var(--grain),var(--ink);color:var(--paper);clip-path:polygon(0 4%,6% 1%,13% 4%,22% 0,31% 3%,40% 1%,52% 4%,61% 0,70% 3%,81% 1%,90% 4%,100% 1%,100% 100%,0 100%)}
+.nudge{display:flex;gap:10px;align-items:flex-start;background:var(--card);border-radius:18px;padding:12px 14px;box-shadow:inset 0 0 0 1px var(--rule)}
+.nudge img{width:38px;height:38px;flex:0 0 auto}
+.nudge p{font:500 14px/1.4 var(--font)}
+.bento{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.tile{position:relative;border-radius:22px;padding:12px 12px 12px;min-height:118px;display:flex;flex-direction:column;justify-content:space-between;background:var(--shine),var(--grain),var(--tc);box-shadow:inset 0 1px 0 oklch(100% 0 0 / .7),inset 0 0 0 1px oklch(20% .014 255 / .08),0 4px 0 0 color-mix(in oklab,var(--tc) 70%,var(--ink) 18%),var(--shadow);overflow:hidden}
+.tile.big{grid-column:span 2;min-height:150px;flex-direction:row;align-items:flex-end;gap:10px}
+.tile.tall{grid-row:span 2}
+.tile img{width:58px;height:58px}
+.tile.big img{width:96px;height:96px;margin-left:auto}
+.tile .name{font:600 18px/1.05 var(--font);letter-spacing:-.02em}
+.tile .meta{font:500 12px/1.3 var(--font);color:var(--ink-2);margin-top:3px}
+.count{position:absolute;top:10px;right:10px;font:600 12px var(--font);background:oklch(100% 0 0 / .7);border-radius:999px;padding:3px 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 12px var(--font);padding:5px 10px;border-radius:999px;background:var(--paper-2);box-shadow:inset 0 0 0 1px var(--rule)}
+.chip.on{background:var(--ink);color:var(--paper);box-shadow:none}
+.chip.lvl{background:color-mix(in oklab,var(--mint) 60%,var(--card))}
+.chip.eff{background:color-mix(in oklab,var(--sugar) 80%,var(--card))}
+.card{position:relative;background:var(--shine),var(--grain),var(--card);border-radius:24px;padding:16px;box-shadow:inset 0 0 0 1px var(--rule),var(--shadow)}
+.card + .card{margin-top:12px}
+.card .num{font:600 13px var(--font);color:var(--muted)}
+.card h3{margin:6px 0 8px;font-size:20px}
+.card .why{font:500 14px/1.4 var(--font);color:var(--ink-2);margin-bottom:12px}
+.card .row{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.card .peek{font:600 14px var(--font);color:var(--blue)}
+.stack{position:relative}
+.stack .ghost{position:absolute;left:10px;right:10px;height:30px;border-radius:24px;background:var(--paper-3);box-shadow:inset 0 0 0 1px var(--rule)}
+.tabs{display:flex;gap:6px;overflow:hidden;margin:12px -18px 14px;padding:0 18px}
+.tab{flex:0 0 auto;font:600 13px var(--font);padding:8px 12px;border-radius:12px;background:var(--card);box-shadow:inset 0 0 0 1px var(--rule),0 3px 0 0 var(--edge)}
+.tab.on{background:var(--pear);box-shadow:0 3px 0 0 var(--pear-deep)}
+.prog{display:flex;gap:4px;margin:10px 0 2px}
+.prog i{flex:1;height:6px;border-radius:9px;background:var(--paper-3)}
+.prog i.d{background:var(--mint-deep)}
+.prog i.c{background:var(--pear-deep)}
+.fact{background:var(--card);border-radius:18px;padding:12px 14px;box-shadow:inset 0 0 0 1px var(--rule)}
+.fact + .fact{margin-top:10px}
+.fact p{font:500 15px/1.4 var(--font)}
+.src{display:inline-block;margin-top:8px;font:500 12px var(--font);color:var(--blue);background:color-mix(in oklab,var(--sugar) 70%,var(--card));padding:4px 9px;border-radius:999px}
+.big-num{font:600 44px/1 var(--font);letter-spacing:-.03em}
+.dock{position:absolute;left:12px;right:12px;bottom:14px;display:flex;gap:10px}
+.dock .btn{flex:1}
+.term{background:var(--grain),oklch(20% .014 255);color:oklch(92% .02 95);border-radius:18px;padding:14px;font:500 13px/1.6 var(--mono)}
+.term .p{color:var(--pear)}
+.term .c{color:oklch(70% .02 255)}
+.stepn{display:flex;gap:12px;align-items:flex-start}
+.stepn + .stepn{margin-top:14px}
+.dot{flex:0 0 32px;height:32px;border-radius:12px;background:var(--pear);display:flex;align-items:center;justify-content:center;font:600 15px var(--font);box-shadow:0 3px 0 0 var(--pear-deep)}
+.stepn p{font:500 15px/1.4 var(--font)}
+.stepn small{display:block;font:500 13px/1.4 var(--font);color:var(--muted);margin-top:2px}
+.hills{position:absolute;left:0;right:0;bottom:0;height:120px;background:radial-gradient(120% 90% at 20% 100%,oklch(91.5% .045 135) 55%,transparent 56%),radial-gradient(110% 80% at 85% 100%,oklch(94.5% .03 118) 55%,transparent 56%)}
+.notes{max-width:1100px;margin:6px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.notes div{background:var(--grain),var(--paper);border-radius:18px;padding:14px 16px;font:500 14px/1.45 var(--font);box-shadow:var(--shadow)}
+.notes b{font-weight:600}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>Flow mockup v2: Paper Arcade</h1>
+  <p>Five phone screens in the order a student meets them. Scroll sideways. Cut-paper texture with glossy card-stock tiles, one colour per industry, DiceBear croodles as each world's mascot, and nudges written in the club's voice. Content is real, from the problem files.</p>
+</div>
+
+<div class="rail">
+
+<!-- 1. Mission -->
+<div class="step">
+  <p class="cap">1 · Mission <span>first 10 seconds</span></p>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>AI Club</span></div>
+    <div class="scroll" style="position:relative">
+      <div class="top"><span class="logo"><b>AI</b> Club</span><span class="pill">How it works</span></div>
+      <div class="sticker round" style="right:12px;top:70px">no 40-page case studies</div>
+      <h2 style="margin-top:26px;max-width:225px">Unsolved. Funded. Yours to crack.</h2>
+      <p class="lede">30 real questions that investors are paying to answer and nobody has. Pick one that itches. The AI does the reading; <mark>you do the thinking.</mark></p>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn primary" style="flex:1">Pick your world</button>
+        <button class="btn">Surprise me</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:22px">
+        <div class="card" style="padding:12px"><div class="big-num" style="font-size:30px">30</div><p style="font:500 12px var(--font);color:var(--muted)">open problems</p></div>
+        <div class="card" style="padding:12px"><div class="big-num" style="font-size:30px">10</div><p style="font:500 12px var(--font);color:var(--muted)">industries</p></div>
+        <div class="card" style="padding:12px"><div class="big-num" style="font-size:30px">0</div><p style="font:500 12px var(--font);color:var(--muted)">known answers</p></div>
+      </div>
+      <div class="nudge" style="margin-top:16px"><img alt="" src="https://api.dicebear.com/9.x/croodles/svg?seed=club&backgroundColor=transparent"><p>Reading the mission takes 20 seconds. Reading a 60-page case study takes your will to live.</p></div>
+      <div class="hills"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Pick a world -->
+<div class="step">
+  <p class="cap">2 · Pick a world <span>bento of industries</span></p>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>AI Club</span></div>
+    <div class="scroll">
+      <div class="top"><span class="logo"><b>AI</b> Club</span><span class="pill">0 of 30 peeked</span></div>
+      <h3 style="font-size:26px">Pick a world.</h3>
+      <p class="lede" style="margin:4px 0 12px;font-size:14px">You can always rage-quit back here.</p>
+      <div class="bento">
+        <div class="tile big" style="--tc:var(--t-fin)"><span class="count">4</span><div><div class="name">Fintech</div><div class="meta">Money moves. Agents spend it. Who's liable?</div></div><img alt="" src="https://api.dicebear.com/9.x/croodles/svg?seed=fintech-coin"></div>
+        <div class="tile" style="--tc:var(--t-saas)"><span class="count">5</span><img alt="" src="https://api.dicebear.com/9.x/croodles/svg?seed=saas-bot"><div><div class="name">SaaS / B2B</div><div class="meta">Agents behaving badly</div></div></div>
+        <div class="tile" style="--tc:var(--t-front)"><span class="count">6</span><img alt="" src="https://api.dicebear.com/9.x/croodles/svg?seed=frontier-rock"><div><div class="name">Frontier science</div><div class="meta">For 2am Wikipedia people</div></div></div>
+        <div class="tile" style="--tc:var(--t-ecom)"><span class="count">4</span><img alt="" src="https://api.dicebear.com/9.x/croodles/svg?seed=ecom-cart"><div><div class="name">E-commerce</div><div class="meta">Robots that shop</div></div></div>
+        <div class="tile" style="--tc:var(--t-health)"><span class="count">2</span><img alt="" src="https://api.dicebear.com/9.x/croodles/svg?seed=health-pulse"><div><div class="name">Healthtech</div><div class="meta">No lab coat needed</div></div></div>
+        <div class="tile" style="--tc:var(--t-mkt)"><span class="count">3</span><img alt="" src="https://api.dicebear.com/9.x/croodles/svg?seed=mkt-mega"><div><div class="name">Marketing</div><div class="meta">Ads nobody sees</div></div></div>
+        <div class="tile" style="--tc:var(--t-log)"><span class="count">2</span><img alt="" src="https://api.dicebear.com/9.x/croodles/svg?seed=log-truck"><div><div class="name">Logistics</div><div class="meta">Monsoon-proof?</div></div></div>
+      </div>
+      <p style="font:500 13px var(--font);color:var(--muted);text-align:center;margin-top:12px">EdTech, Real estate and Legal below</p>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Brief cards -->
+<div class="step">
+  <p class="cap">3 · Fintech world <span>brief cards, 15-second read</span></p>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>AI Club</span></div>
+    <div class="scroll">
+      <div class="top"><span class="pill">Worlds</span><span class="pill">1 of 4</span></div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+        <img alt="" src="https://api.dicebear.com/9.x/croodles/svg?seed=fintech-coin" style="width:64px;height:64px;background:var(--t-fin);border-radius:18px">
+        <div><h3>Fintech</h3><p style="font:500 13px var(--font);color:var(--muted)">4 problems, none of them "build a budgeting app"</p></div>
+      </div>
+      <div class="chips" style="margin-bottom:12px"><span class="chip on">All</span><span class="chip">I'm new (L2)</span><span class="chip">A weekend</span><span class="chip">A semester</span></div>
+      <div class="stack">
+        <div class="card">
+          <span class="num">07</span>
+          <h3>Can banks catch mule rings together without pooling customer data?</h3>
+          <p class="why">Mule accounts drive cyber fraud, and no single bank sees the whole network.</p>
+          <div class="chips"><span class="chip lvl">L3 to L5</span><span class="chip eff">A semester</span><span class="chip">Graph data</span><span class="chip">Policy</span></div>
+          <div class="row"><span class="peek">Read the whole thing</span><button class="btn primary" style="min-height:42px;padding:0 14px;font-size:14px">I'm curious</button></div>
+        </div>
+        <div class="ghost" style="bottom:-12px;z-index:-1"></div>
+      </div>
+      <div class="card" style="opacity:.92">
+        <span class="num">06</span>
+        <h3>When your AI agent spends your money, who is liable?</h3>
+        <div class="chips"><span class="chip lvl">L3 to L5</span><span class="chip eff">A month</span></div>
+      </div>
+      <div class="nudge" style="margin-top:12px"><img alt="" src="https://api.dicebear.com/9.x/croodles/svg?seed=fintech-coin"><p>Swipe the card away if it bores you. It won't take it personally. Probably.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Full problem in bites -->
+<div class="step">
+  <p class="cap">4 · The full problem <span>in bites, not a wall</span></p>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>AI Club</span></div>
+    <div class="scroll">
+      <div class="top"><span class="pill">Fintech</span><span class="pill">Save</span></div>
+      <span class="num" style="font:600 13px var(--font);color:var(--muted)">Problem 07</span>
+      <h3 style="font-size:23px;margin-top:4px">Can banks catch mule rings together without pooling customer data?</h3>
+      <div class="prog"><i class="d"></i><i class="d"></i><i class="c"></i><i></i><i></i><i></i><i></i></div>
+      <div class="tabs"><span class="tab">Question</span><span class="tab">Who cares</span><span class="tab on">What's known</span><span class="tab">The unknown</span><span class="tab">Words</span></div>
+      <div class="fact"><p>System-wide analytics found <mark>12% more illicit accounts</mark> in a central bank test on synthetic data.</p><span class="src">BIS · Project Hertha</span></div>
+      <div class="fact"><p>23 Indian banks run RBI's MuleHunter.AI. How many mules it caught is not public.</p><span class="src">MediaNama · RTI</span></div>
+      <div class="fact"><p>A US-UK prize ran privacy-preserving fraud detection on synthetic SWIFT data.</p><span class="src">NSF</span></div>
+      <div class="nudge" style="margin-top:12px;background:color-mix(in oklab,var(--mint) 35%,var(--card))"><img alt="" src="https://api.dicebear.com/9.x/croodles/svg?seed=fintech-coin"><p>That's everything anyone knows for sure. The next card is the fun part.</p></div>
+      <div class="dock"><button class="btn">Back</button><button class="btn primary">Show me the unknown</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. Start in Claude Code -->
+<div class="step">
+  <p class="cap">5 · Start it <span>optional, when they're hooked</span></p>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>AI Club</span></div>
+    <div class="scroll">
+      <div class="top"><span class="pill">Problem 07</span><span class="pill">Setup guide</span></div>
+      <h3 style="font-size:26px">Ready to crack it?</h3>
+      <p class="lede" style="font-size:15px;margin-bottom:16px">Three steps. Your setup buddy can sit with you for the first one.</p>
+      <div class="stepn"><span class="dot">1</span><p>Install the Club Agent<small>One command, about 10 minutes. It makes your own research folder.</small></p></div>
+      <div class="stepn"><span class="dot">2</span><p>Open that folder in Claude Code<small>Desktop app, Code tab.</small></p></div>
+      <div class="stepn"><span class="dot">3</span><p>Tell it which problem<small>It asks you questions before it answers any. That's the point.</small></p></div>
+      <div class="term" style="margin-top:16px"><span class="c"># in Claude Code</span><br><span class="p">&gt;</span> start problem 07</div>
+      <div style="display:flex;gap:10px;margin-top:12px"><button class="btn primary" style="flex:1">Copy</button><button class="btn" style="flex:1">Setup guide</button></div>
+      <div class="torn" style="margin-top:22px">
+        <p style="font:600 18px/1.2 var(--font)">Not today?</p>
+        <p style="font:500 14px/1.45 var(--font);opacity:.85;margin-top:4px">Save it. The question isn't going anywhere. That's kind of the problem.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="notes">
+  <div><b>Navigation as a game.</b> Worlds are bento tiles you "enter"; problems are cards you flip or swipe; the full problem is a short run of bite cards with a progress bar. Back always returns to the world, never to the top.</div>
+  <div><b>Shine.</b> Every tile and card is card stock with a glossy top-left sheen and a pressable edge. Each industry owns one colour and one croodle mascot, reused on every screen inside that world.</div>
+  <div><b>Reading load.</b> Brief card: question, one line of why, four chips. Full problem: one section per bite, at most three facts, each with its source as a pill.</div>
+  <div><b>Nudges.</b> One per screen, from the world's mascot, dry rather than loud. Tell me if the jokes should be sharper or softer.</div>
+</div>
+</body>
+</html>
