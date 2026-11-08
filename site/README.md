@@ -1,0 +1,37 @@
+# AI Club Problem Site
+
+**What:** The public site where members browse the AI Club's frontier problems by industry, read short briefs, step through the full problem in bites, and see how to start it in Claude Code.
+**How:** A static Next.js export built from `club-agent/problems/**` and `club-agent/install/SETUP-GUIDE.md`. Per-member state (peeked, saved, progress, filters) lives only in the browser's `localStorage`.
+**Objective:** Members with low reading stamina but real curiosity find a problem that's theirs, fast.
+
+## Run it
+
+From the repo root:
+
+- `npm ci && npm ci --prefix site`: install everything.
+- `npm run site:dev`: dev server at http://localhost:3000.
+- `npm run site:build`: static export to `site/out/`.
+- `npm run site:test`: unit tests, plus checks on the export when `site/out` exists.
+- `npm run check`: format, lint, kit tests and site tests (this runs on pre-push and in CI).
+
+## Content
+
+- **Problems:** edit or add files in `club-agent/problems/<industry>/`. The site picks them up on the next build. A file that breaks the schema fails the build.
+- **New industry:** add its folder, then add one entry to `site/src/lib/industries.ts` (name, colour token, mascot seed, joke) and its colour token in `site/src/app/globals.css`.
+- **Nudges:** `site/src/lib/nudges.ts`.
+- **Setup steps:** edit `club-agent/install/SETUP-GUIDE.md`. `/start` renders it.
+
+## Configure
+
+| Setting                    | Where                                       | Default                                       |
+| -------------------------- | ------------------------------------------- | --------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`     | GitHub repository variable (and Vercel env) | `https://ai-club-problems.vercel.app`         |
+| `NEXT_PUBLIC_KIT_REPO_URL` | GitHub repository variable (and Vercel env) | `https://github.com/REPLACE-ME/ai-club-agent` |
+
+## Deploy
+
+`.github/workflows/deploy-site.yml` deploys to Vercel production on every push to `main` that touches the site, the problems or the setup guide. One-time setup:
+
+1. Create a Vercel project with Root Directory `site`, framework Next.js and output `out`.
+2. In GitHub, add these repository secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID`. Run `vercel link` in `site/`, then copy them from `site/.vercel/project.json`.
+3. Add the repository variables `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_KIT_REPO_URL`.

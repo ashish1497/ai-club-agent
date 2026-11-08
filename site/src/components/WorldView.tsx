@@ -79,7 +79,16 @@ export function WorldView({
         </fieldset>
       </aside>
       <section className="world-cards" aria-live="polite">
-        <p className="visually-hidden">{`${shown.length} of ${items.length} problems shown`}</p>
+        {shown.length < items.length ? (
+          <p className="filtered">
+            Showing {shown.length} of {items.length}.{" "}
+            <button type="button" className="linkish" onClick={() => choose({ level: "any", effort: "any" })}>
+              Clear filters
+            </button>
+          </p>
+        ) : (
+          <p className="visually-hidden">{`All ${items.length} problems shown`}</p>
+        )}
         {shown.length ? (
           <div className="cards-grid">
             {shown.map((p) => (

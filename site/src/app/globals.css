@@ -1010,3 +1010,19 @@ button.chip[aria-pressed="true"] {
   color: inherit;
   padding: 0;
 }
+
+.filtered {
+  font: 500 14px var(--font);
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.linkish {
+  background: none;
+  border: 0;
+  padding: 0 2px;
+  min-height: 44px;
+  font: 600 14px var(--font);
+  color: var(--blue);
+  text-decoration: underline;
+  cursor: pointer;
+}

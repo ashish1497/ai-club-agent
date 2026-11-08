@@ -1,0 +1,67 @@
+# What: Deploys the AI Club problem site to Vercel production when main changes the site or its content.
+# How: Installs, runs the full repo check (format, lint, kit + site tests), builds the static export, then ships it
+#      with the Vercel CLI as a prebuilt deployment.
+# Objective: Every merge to main that touches problems or the site goes live automatically, and only if checks pass.
+name: Deploy problem site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "club-agent/problems/**"
+      - "club-agent/install/SETUP-GUIDE.md"
+      - ".github/workflows/deploy-site.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+      NEXT_PUBLIC_KIT_REPO_URL: ${{ vars.NEXT_PUBLIC_KIT_REPO_URL }}
+      HUSKY: "0"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            site/package-lock.json
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: |
+          npm ci
+          npm ci --prefix site
+
+      - name: Check (format, lint, kit and site tests)
+        run: npm run check
+
+      - name: Verify the static export
+        run: npm --prefix site run build && npm run site:test
+
+      - name: Pull Vercel project settings
+        working-directory: site
+        run: npx --yes vercel@latest pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build
+        working-directory: site
+        run: npx --yes vercel@latest build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy to production
+        working-directory: site
+        run: npx --yes vercel@latest deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
