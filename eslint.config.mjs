@@ -33,6 +33,7 @@ export default defineConfig([
     files: ["site/**/*.{ts,tsx}"],
     extends: [tseslint.configs.recommended],
     plugins: { "react-hooks": reactHooks, "@next/next": nextPlugin },
+    settings: { next: { rootDir: "site/" } },
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
     rules: {
       ...reactHooks.configs.recommended.rules,
