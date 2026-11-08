@@ -24,7 +24,7 @@ export function BiteViewer({ id, worldHref, panels }: { id: string; worldHref: s
   );
   const stored = useStoredState();
   const [chosen, setChosen] = useState<number | null>(null);
-  const fromHash = hash ? stepFromHash(hash) : null;
+  const fromHash = stepFromHash(hash);
   const current = chosen ?? fromHash ?? Math.min(stored.progress[id] ?? 0, STEPS.length - 1);
   const last = STEPS.length - 1;
 
@@ -107,9 +107,17 @@ export function BiteViewer({ id, worldHref, panels }: { id: string; worldHref: s
             Next: {STEPS[current + 1].label}
           </button>
         ) : (
-          <a className="btn btn--primary" href="#start-h">
+          <button
+            type="button"
+            className="btn btn--primary"
+            onClick={() => {
+              const h = document.getElementById("start-h");
+              h?.scrollIntoView({ behavior: "smooth", block: "start" });
+              h?.focus({ preventScroll: true });
+            }}
+          >
             Start it
-          </a>
+          </button>
         )}
       </div>
     </div>

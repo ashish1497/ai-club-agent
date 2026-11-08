@@ -9,7 +9,9 @@ export function StartPanel({ id }: { id: string }) {
   const cmd = `start problem ${id}`;
   return (
     <section className="start" aria-labelledby="start-h">
-      <h2 id="start-h">Ready to crack it?</h2>
+      <h2 id="start-h" tabIndex={-1}>
+        Ready to crack it?
+      </h2>
       <ol className="start-steps">
         <li>Install the Club Agent (once, about 10 minutes).</li>
         <li>Open your research folder in Claude Code.</li>

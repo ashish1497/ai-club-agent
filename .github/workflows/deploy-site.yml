@@ -51,17 +51,13 @@ jobs:
       - name: Check (format, lint, kit and site tests)
         run: npm run check
 
-      - name: Verify the static export
-        run: npm --prefix site run build && npm run site:test
+      - name: Build the static export
+        run: npm run site:build
 
-      - name: Pull Vercel project settings
-        working-directory: site
-        run: npx --yes vercel@latest pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Verify the export (pages present, no runtime DiceBear calls)
+        run: npm --prefix site exec vitest run tests/build.test.ts
 
-      - name: Build
-        working-directory: site
-        run: npx --yes vercel@latest build --prod --token=${{ secrets.VERCEL_TOKEN }}
-
+      # Deploys the already-built, already-tested static folder. No build runs on Vercel,
+      # so the Vercel project needs no root directory or framework settings.
       - name: Deploy to production
-        working-directory: site
-        run: npx --yes vercel@latest deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: npx --yes vercel@latest deploy site/out --prod --yes --token=${{ secrets.VERCEL_TOKEN }}

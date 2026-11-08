@@ -5,6 +5,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { PROBLEMS_DIR } from "../config";
+import { buildSteps, hasContent } from "./steps";
 import type { Evidence, Fact, FundingRow, Problem, Resource, Term } from "./types";
 
 const REQUIRED = [
@@ -152,7 +153,14 @@ export function loadProblems(dir: string = PROBLEMS_DIR): Problem[] {
         .filter((f) => /^\d{2}-.+\.md$/.test(f))
         .map((f) => path.join(dir, d, f)),
     );
-  const problems = files.map(parse).sort((a, b) => a.id.localeCompare(b.id));
+  const problems = files
+    .map((f) => {
+      const p = parse(f);
+      for (const step of buildSteps(p))
+        if (!hasContent(step)) throw new Error(`${f}: problem ${p.id} has empty step ${step.slug}`);
+      return p;
+    })
+    .sort((a, b) => a.id.localeCompare(b.id));
   const seen = new Set<string>();
   for (const p of problems) {
     if (seen.has(p.id)) throw new Error(`duplicate problem id ${p.id}`);

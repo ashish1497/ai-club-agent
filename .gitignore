@@ -8,3 +8,4 @@ site/next-env.d.ts
 site/node_modules/
 *.tsbuildinfo
 site/.vercel/
+.vercel/

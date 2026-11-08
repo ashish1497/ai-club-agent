@@ -67,6 +67,23 @@ describe("loadProblems", () => {
     expect(() => loadProblems(dir)).toThrow(/missing section ## Who cares/);
   });
 
+  it("throws when a required section is empty", () => {
+    const dir = mkdtempSync(path.join(tmpdir(), "probs-"));
+    cpSync(PROBLEMS_DIR, dir, { recursive: true });
+    const f = path.join(dir, "fintech", "07-cross-bank-mule-detection.md");
+    const text = readFileSync(f, "utf8").replace(/## Out of scope\n[\s\S]*?\n## /, "## Out of scope\n\n## ");
+    writeFileSync(f, text);
+    expect(() => loadProblems(dir)).toThrow(/07.*empty step scope/);
+  });
+
+  it("throws when the India angle is empty", () => {
+    const dir = mkdtempSync(path.join(tmpdir(), "probs-"));
+    cpSync(PROBLEMS_DIR, dir, { recursive: true });
+    const f = path.join(dir, "fintech", "07-cross-bank-mule-detection.md");
+    writeFileSync(f, readFileSync(f, "utf8").replace(/## India angle\n[\s\S]*?\n## /, "## India angle\n\n## "));
+    expect(() => loadProblems(dir)).toThrow(/07.*empty step who/);
+  });
+
   it("throws on a duplicate id", () => {
     const dir = mkdtempSync(path.join(tmpdir(), "probs-"));
     cpSync(PROBLEMS_DIR, dir, { recursive: true });

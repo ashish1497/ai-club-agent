@@ -47,10 +47,11 @@ export function buildSteps(p: Problem): BuiltStep[] {
   ];
 }
 
-export function stepFromHash(hash: string): number {
+/** Index of the step named by a URL hash, or null when the hash isn't a step (e.g. "#start-h" or empty). */
+export function stepFromHash(hash: string): number | null {
   const slug = hash.replace(/^#/, "");
   const i = STEPS.findIndex((s) => s.slug === slug);
-  return i < 0 ? 0 : i;
+  return i < 0 ? null : i;
 }
 
 export function hasContent(s: BuiltStep): boolean {
@@ -58,7 +59,7 @@ export function hasContent(s: BuiltStep): boolean {
     case "question":
       return !!s.question;
     case "who":
-      return s.whoCares.length > 0;
+      return s.whoCares.length > 0 && !!s.india;
     case "scope":
       return s.inScope.length > 0 && s.outOfScope.length > 0;
     case "known":

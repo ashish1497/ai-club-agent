@@ -24,8 +24,9 @@ describe("steps", () => {
   it("stepFromHash maps valid and invalid hashes", () => {
     expect(stepFromHash("#known")).toBe(3);
     expect(stepFromHash("known")).toBe(3);
-    expect(stepFromHash("#nope")).toBe(0);
-    expect(stepFromHash("")).toBe(0);
+    expect(stepFromHash("#nope")).toBeNull();
+    expect(stepFromHash("#start-h")).toBeNull();
+    expect(stepFromHash("")).toBeNull();
   });
 
   it("buildSteps returns one entry per step for every problem", () => {
