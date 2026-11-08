@@ -6,6 +6,8 @@
 
 ## Unreleased
 
+- Installer asks where to put the research folder (Enter keeps `~/my-research`; `~` and relative paths work). `--workspace` still skips the question.
+- Setup guide: clone into `~/ai-club-agent` with the real repo URL (the old `~/club-agent/install` path did not exist after cloning), plain step-by-step instructions and a troubleshooting table. No action needed for existing workspaces.
 - Problem site (`site/`): static Next.js "Paper Arcade" site that renders the problem library by industry, in bite-sized steps, with browser-only state; GitHub Action deploys to Vercel from main.
 
 - Problem statements enriched: who cares, in/out of scope, sourced "what is known" (every claim linked), key terms, starting points (datasets, reports, regulators), funding links, level fit, effort, skills, and "Leads to check" for anything unverified. 189 links checked at build time.

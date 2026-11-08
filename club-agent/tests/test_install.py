@@ -127,6 +127,50 @@ if __name__ == "__main__":
     unittest.main()
 
 
+
+class TestInstallShFolderQuestion(unittest.TestCase):
+    # What: the interactive installer asks where to put the research folder.
+    # How: run install.sh with answers piped to stdin and HOME pointed at a temp folder; no --workspace flag.
+    # Objective: members choose their own folder, and pressing Enter still gives ~/my-research.
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.home = Path(self.tmp.name)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def run_interactive(self, answers, cwd=None):
+        env = {**os.environ, "HOME": str(self.home)}
+        return subprocess.run(["bash", str(SH), "--kit", str(KIT)], input=answers, capture_output=True,
+                              text=True, env=env, cwd=cwd or self.home)
+
+    def test_enter_uses_default_folder(self):
+        r = self.run_interactive("\nRiya\nL3\nfintech\n\n")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("name: Riya", (self.home / "my-research" / "profile.md").read_text())
+
+    def test_tilde_folder_with_spaces(self):
+        r = self.run_interactive("~/Desktop/club research\nRiya\nL3\nfintech\n\n")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        ws = self.home / "Desktop" / "club research"
+        self.assertIn("intensity: standard", (ws / "profile.md").read_text())
+        self.assertIn(f"Open this folder in Claude Code: {ws.resolve()}", r.stdout)
+
+    def test_relative_folder_is_made_absolute(self):
+        (self.home / "work").mkdir()
+        r = self.run_interactive("research\nRiya\nL2\nfintech\n\n", cwd=self.home / "work")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertTrue((self.home / "work" / "research" / "profile.md").is_file())
+        self.assertTrue((self.home / "work" / "research" / "club").resolve() == KIT.resolve())
+
+    def test_workspace_flag_skips_the_folder_question(self):
+        ws = self.home / "flagged"
+        r = subprocess.run(["bash", str(SH), "--kit", str(KIT), "--workspace", str(ws)],
+                           input="Riya\nL2\nfintech\n\n", capture_output=True, text=True,
+                           env={**os.environ, "HOME": str(self.home)})
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("name: Riya", (ws / "profile.md").read_text())
+
 PS1 = KIT / "install" / "install.ps1"
 GUIDE = KIT / "install" / "SETUP-GUIDE.md"
 
@@ -143,6 +187,12 @@ class TestInstallPs1(unittest.TestCase):
                     "Open this folder in Claude Code:", "Read(./private-data/**)", ".COPIED",
                     "Re-run the installer after every kit update"]:
             self.assertIn(msg, text + (KIT / "install" / "claude-settings.json").read_text())
+
+    def test_ps1_asks_for_the_folder_like_install_sh(self):
+        text = PS1.read_text()
+        self.assertIn("Where should your research folder go? Press Enter for ~/my-research", text)
+        self.assertIn("Where should your research folder go? Press Enter for ~/my-research", SH.read_text())
+        self.assertIn("$PSBoundParameters.ContainsKey('Workspace')", text)
 
     def test_ps1_removes_links_without_recursing(self):
         text = PS1.read_text()

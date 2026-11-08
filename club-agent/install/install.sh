@@ -6,7 +6,7 @@ set -euo pipefail
 
 usage() {
   cat >&2 <<'USAGE'
-Usage: install.sh [--kit DIR] [--workspace DIR]
+Usage: install.sh [--kit DIR] [--workspace DIR]   (interactive runs ask for the folder when --workspace is not given)
                   [--non-interactive --name NAME --level L1..L5 [--intensity gentle|standard|relentless] --interests "a,b"]
 USAGE
 }
@@ -16,13 +16,14 @@ die() { echo "error: $1" >&2; exit "${2:-2}"; }
 # What: defaults. How: kit = folder above this script; workspace = ~/my-research. Objective: zero-argument install works.
 KIT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 WS="$HOME/my-research"
+WS_GIVEN=0
 NONINTERACTIVE=0
 NAME="" LEVEL="" INTENSITY="" INTERESTS=""
 
 while [ $# -gt 0 ]; do
   case "$1" in
     --kit) KIT="${2:?}"; shift 2 ;;
-    --workspace) WS="${2:?}"; shift 2 ;;
+    --workspace) WS="${2:?}"; WS_GIVEN=1; shift 2 ;;
     --non-interactive) NONINTERACTIVE=1; shift ;;
     --name) NAME="${2:?}"; shift 2 ;;
     --level) LEVEL="${2:?}"; shift 2 ;;
@@ -32,6 +33,19 @@ while [ $# -gt 0 ]; do
     *) usage; die "unknown argument: $1" ;;
   esac
 done
+
+# What: ask where the research folder goes. How: Enter keeps ~/my-research; expand a leading ~ and make relative paths absolute.
+# Objective: members choose their own folder without learning the --workspace flag.
+if [ "$NONINTERACTIVE" -eq 0 ] && [ "$WS_GIVEN" -eq 0 ]; then
+  read -r -p "Where should your research folder go? Press Enter for ~/my-research: " ANSWER
+  case "$ANSWER" in
+    "") ;;
+    "~") WS="$HOME" ;;
+    "~/"*) WS="$HOME/${ANSWER#\~/}" ;;
+    /*) WS="$ANSWER" ;;
+    *) WS="$PWD/$ANSWER" ;;
+  esac
+fi
 
 # What: ask the 4 profile questions. How: only when interactive and profile.md does not exist yet. Objective: same answers as --non-interactive.
 if [ "$NONINTERACTIVE" -eq 0 ] && [ ! -f "$WS/profile.md" ]; then
@@ -55,6 +69,7 @@ KIT="$(cd "$KIT" && pwd -P)"
 
 # What: folders and links. How: mkdir -p; replace club only if it is already a symlink. Objective: idempotent, never clobber real folders.
 mkdir -p "$WS"/{problems,domains,digests,private-data,.claude,.agents}
+WS="$(cd "$WS" && pwd -P)"
 touch "$WS/private-data/.gitkeep"
 if [ -L "$WS/club" ]; then rm "$WS/club"; fi
 [ -e "$WS/club" ] && die "$WS/club exists and is not a link; move it aside and re-run" 1

@@ -14,6 +14,17 @@ $ErrorActionPreference = "Stop"
 
 function Fail([string]$msg, [int]$code = 2) { [Console]::Error.WriteLine("error: $msg"); exit $code }
 
+# What: ask where the research folder goes. How: only when interactive and -Workspace was not passed; Enter keeps ~/my-research,
+# a leading ~ means the home folder, and relative paths are made absolute. Objective: parity with install.sh.
+if (-not $NonInteractive -and -not $PSBoundParameters.ContainsKey('Workspace')) {
+  $answer = (Read-Host "Where should your research folder go? Press Enter for ~/my-research").Trim()
+  if ($answer -ne "") {
+    if ($answer -eq "~") { $answer = $HOME }
+    elseif ($answer -match '^~[\\/]') { $answer = Join-Path $HOME $answer.Substring(2) }
+    $Workspace = [System.IO.Path]::GetFullPath((Join-Path (Get-Location).Path $answer))
+  }
+}
+
 $profilePath = Join-Path $Workspace "profile.md"
 
 # What: ask the 4 profile questions. How: only when interactive and no profile yet. Objective: parity with install.sh.

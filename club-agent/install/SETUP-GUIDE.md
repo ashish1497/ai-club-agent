@@ -24,12 +24,13 @@ The kit is downloaded into a folder called `ai-club-agent` in your home folder. 
    You'll see a few lines ending in "done". You now have a folder called `ai-club-agent` in your home folder.
 3. **Build your workspace.** Copy, paste, and press Enter:
    `bash ~/ai-club-agent/club-agent/install/install.sh`
-   It asks four questions. Type an answer and press Enter after each one:
-   1. **Your name**, for example `Riya`.
-   2. **Your AI comfort level**, from `L1` (new to this) to `L5` (I build things). Type it exactly like that, for example `L2`.
-   3. **Fields that interest you**, separated by commas, for example `fintech, healthtech`.
-   4. **Intensity:** press Enter to take the default for your level, or type `gentle`, `standard` or `relentless`.
-4. **Check that it worked.** The last lines should say `Club Agent workspace ready.` and `Open this folder in Claude Code:` followed by a path ending in `/my-research`.
+   It asks five questions. Type an answer and press Enter after each one:
+   1. **Where to put your research folder.** Press Enter to use `my-research` in your home folder (recommended), or type a path such as `~/Documents/ai-club`.
+   2. **Your name**, for example `Riya`.
+   3. **Your AI comfort level**, from `L1` (new to this) to `L5` (I build things). Type it exactly like that, for example `L2`.
+   4. **Fields that interest you**, separated by commas, for example `fintech, healthtech`.
+   5. **Intensity:** press Enter to take the default for your level, or type `gentle`, `standard` or `relentless`.
+4. **Check that it worked.** The last lines should say `Club Agent workspace ready.` and `Open this folder in Claude Code:` followed by your research folder's path.
 
 Running step 3 again is safe. It never overwrites your files, and it won't ask the questions again.
 
@@ -38,16 +39,16 @@ Running step 3 again is safe. It never overwrites your files, and it won't ask t
 1. **Open PowerShell.** Press the Windows key, type `PowerShell`, and press Enter.
 2. **Download the kit.** Copy, paste, and press Enter:
    `git clone https://github.com/ashish1497/ai-club-agent $HOME\ai-club-agent`
-3. **Build your workspace.** Copy, paste, and press Enter, then answer the same four questions as on macOS:
+3. **Build your workspace.** Copy, paste, and press Enter, then answer the same five questions as on macOS:
    `powershell -ExecutionPolicy Bypass -File $HOME\ai-club-agent\club-agent\install\install.ps1`
-4. **Check that it worked.** The last lines should say `Open this folder in Claude Code:` followed by your `my-research` folder.
+4. **Check that it worked.** The last lines should say `Open this folder in Claude Code:` followed by your research folder's path.
 
 If Windows doesn't allow links, the installer copies the kit instead and tells you so. In that case, re-run step 3 after every kit update.
 
 ## First session
 
 1. Open the **Claude desktop app** and click the **Code** tab.
-2. Choose a folder: pick **`my-research`** from your home folder. Don't pick `ai-club-agent`.
+2. Choose a folder: pick your research folder (**`my-research`** in your home folder, unless you chose another one). Don't pick `ai-club-agent`.
 3. If Claude Code asks whether to allow importing `club/AGENTS.md` (an "external import"), click **Allow**. That file is the agent's rulebook.
 4. Say `hi`. The agent greets you by name and checks that everything is set up.
 5. Pick a problem:
