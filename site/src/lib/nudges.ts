@@ -3,7 +3,7 @@
 // Objective: Easy to edit the club's voice without touching components. Dry, never mocking the member or the problem.
 export const NUDGES = {
   landing: "Reading the mission takes 20 seconds. Reading a 60-page case study takes your will to live.",
-  pickWorld: "Pick a world. You can always rage-quit back here.",
+  pickWorld: "You can always rage-quit back here.",
   world: {
     fintech: "Hover a card. It won't bite. The questions might.",
     "frontier-science": "Nobody has the answer key. That's the good news.",

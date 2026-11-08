@@ -4,6 +4,7 @@
 import type { Filters, LevelFilter } from "./filters";
 
 export const STORAGE_KEY = "aiclub:v1";
+export const CHANGE_EVENT = "aiclub:change";
 
 export type State = {
   peeked: string[];
@@ -16,7 +17,7 @@ const defaults = (): State => ({ peeked: [], saved: [], progress: {}, filters: {
 
 const strings = (v: unknown) => (Array.isArray(v) && v.every((x) => typeof x === "string") ? (v as string[]) : []);
 
-function normalise(raw: unknown): State {
+export function normalise(raw: unknown): State {
   const d = defaults();
   if (!raw || typeof raw !== "object") return d;
   const r = raw as Record<string, unknown>;
@@ -42,6 +43,7 @@ export function readState(): State {
 export function writeState(s: State): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+    window.dispatchEvent(new Event(CHANGE_EVENT));
   } catch {
     // Storage unavailable (private mode, quota, blocked): the site keeps working without memory.
   }
