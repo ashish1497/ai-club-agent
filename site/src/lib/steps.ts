@@ -52,3 +52,28 @@ export function stepFromHash(hash: string): number {
   const i = STEPS.findIndex((s) => s.slug === slug);
   return i < 0 ? 0 : i;
 }
+
+export function hasContent(s: BuiltStep): boolean {
+  switch (s.slug) {
+    case "question":
+      return !!s.question;
+    case "who":
+      return s.whoCares.length > 0;
+    case "scope":
+      return s.inScope.length > 0 && s.outOfScope.length > 0;
+    case "known":
+      return s.facts.length > 0;
+    case "unknown":
+      return s.items.length > 0;
+    case "words":
+      return s.terms.length > 0;
+    case "angles":
+      return !!(s.theory && s.practice);
+    case "ways-in":
+      return s.resources.length > 0;
+    case "funding":
+      return s.rows.length > 0;
+    case "risks":
+      return s.risks.length > 0;
+  }
+}

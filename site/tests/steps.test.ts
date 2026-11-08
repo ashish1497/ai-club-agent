@@ -36,3 +36,24 @@ describe("steps", () => {
     }
   });
 });
+
+import { hasContent } from "../src/lib/steps";
+import { getProblem as get } from "../src/lib/problems";
+
+describe("step content", () => {
+  it("problem 07 'known' step carries facts with sources", () => {
+    const known = buildSteps(get("07")!).find((s) => s.slug === "known");
+    expect(known && known.slug === "known" && known.facts.every((f) => f.source)).toBe(true);
+  });
+
+  it("every problem has 10 steps with content", () => {
+    for (const p of loadProblems())
+      for (const s of buildSteps(p)) expect(hasContent(s), `${p.id} ${s.slug}`).toBe(true);
+  });
+
+  it("risks step carries leads only when the file has them", () => {
+    const p = { ...get("07")!, leads: [] };
+    const risks = buildSteps(p).find((s) => s.slug === "risks");
+    expect(risks && risks.slug === "risks" && risks.leads).toEqual([]);
+  });
+});

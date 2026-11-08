@@ -3,6 +3,7 @@
 // Objective: Members see only this world's problems, in short cards they can skim.
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Mascot } from "@/components/Mascot";
 import { Nudge } from "@/components/Nudge";
 import { PeekCounter } from "@/components/PeekCounter";
@@ -43,9 +44,9 @@ export default async function World({ params }: { params: Promise<{ industry: st
   return (
     <div className="wrap">
       <TopBar>
-        <a className="pill" href="/#worlds">
+        <Link className="pill" href="/#worlds">
           All worlds
-        </a>
+        </Link>
         <PeekCounter total={all.length} />
       </TopBar>
       <main style={style}>
