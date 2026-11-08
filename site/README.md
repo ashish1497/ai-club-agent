@@ -42,6 +42,7 @@ From the repo root:
 
 `.github/workflows/deploy-site.yml` deploys to Vercel production on every push to `main` that touches the site, the problems or the setup guide. One-time setup:
 
+0. Git-triggered Vercel deployments are disabled by the root `vercel.json` (`git.deploymentEnabled: false`), so only this tested workflow deploys, even if the repo is connected to Vercel.
 1. Create a Vercel project. The workflow uploads the already-built `site/out` folder, so set Framework Preset to **Other** and leave Root Directory and Build Command empty.
 2. In GitHub, add these repository secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID`. Run `vercel link` at the repo root, then copy them from `.vercel/project.json`.
 3. Add the repository variables `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_KIT_REPO_URL`.

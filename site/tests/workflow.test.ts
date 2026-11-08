@@ -17,3 +17,10 @@ describe("deploy workflow", () => {
     expect(wf).not.toMatch(/vercel@[^\s]+ build/);
   });
 });
+
+describe("vercel git integration", () => {
+  it("is disabled so only the tested GitHub Action deploys", () => {
+    const cfg = JSON.parse(readFileSync(path.join(REPO_ROOT, "vercel.json"), "utf8"));
+    expect(cfg.git?.deploymentEnabled).toBe(false);
+  });
+});
