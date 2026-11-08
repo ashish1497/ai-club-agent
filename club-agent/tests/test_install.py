@@ -176,3 +176,22 @@ class TestSetupGuide(unittest.TestCase):
         buddy = text.split("## Setup buddy checklist", 1)[1]
         self.assertIn("constitution", buddy)
         self.assertTrue(has_wao_header(text))
+
+
+class TestSetupGuidePaths(unittest.TestCase):
+    # What: every kit path the guide tells members to type must exist after cloning the repo.
+    # How: the guide clones the whole repo into ~/ai-club-agent (macOS) or $HOME\ai-club-agent (Windows);
+    #      each path under that folder is resolved against the repo root and must exist.
+    # Objective: a member copying the guide line by line never hits "No such file or directory".
+    def test_guide_paths_exist_in_a_fresh_clone(self):
+        import re
+        text = GUIDE.read_text()
+        repo = KIT.parent
+        self.assertIn("~/ai-club-agent", text)
+        self.assertIn("$HOME\\ai-club-agent", text)
+        paths = re.findall(r"~/ai-club-agent/([\w./-]+)", text)
+        paths += [p.replace("\\", "/") for p in re.findall(r"\$HOME\\ai-club-agent\\([\w.\\-]+)", text)]
+        for p in ["club-agent/install/install.sh", "club-agent/install/install.ps1"]:
+            self.assertIn(p, paths)
+        for p in paths:
+            self.assertTrue((repo / p.rstrip("/.")).exists(), f"guide path missing in repo: {p}")
