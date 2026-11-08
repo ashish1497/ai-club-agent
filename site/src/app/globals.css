@@ -509,3 +509,143 @@ button.chip[aria-pressed="true"] {
     scroll-behavior: auto !important;
   }
 }
+
+/* World page */
+.world {
+  display: grid;
+  gap: 16px;
+}
+.world-side {
+  display: grid;
+  gap: 14px;
+}
+.world-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.world-mascot {
+  width: 72px !important;
+  height: 72px !important;
+  background: var(--shine), var(--tc);
+  border-radius: 20px;
+  padding: 4px;
+}
+.world-title {
+  font: 600 28px/1.05 var(--font);
+}
+.world-sub {
+  font: 500 14px/1.4 var(--font);
+  color: var(--muted);
+  margin-top: 4px;
+}
+.filter {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.filter legend {
+  font: 600 14px var(--font);
+  margin-bottom: 6px;
+  padding: 0;
+}
+.cards-grid {
+  display: grid;
+  gap: 12px;
+}
+.brief-num {
+  font: 600 13px var(--font);
+  color: var(--muted);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.seen {
+  font: 500 12px var(--font);
+  background: color-mix(in oklab, var(--mint) 55%, var(--card));
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.brief-title {
+  font: 600 20px/1.12 var(--font);
+  margin: 6px 0 8px;
+}
+.brief-title a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.brief-title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+.brief-why {
+  font: 500 15px/1.45 var(--font);
+  color: var(--ink-2);
+  margin-bottom: 12px;
+}
+.brief-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+.peek {
+  font: 600 15px var(--font);
+}
+.brief {
+  transition:
+    translate var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+.brief:hover {
+  translate: 0 -3px;
+  box-shadow:
+    inset 0 0 0 2px var(--ink),
+    0 18px 34px -16px oklch(20% 0.014 255 / 0.45);
+}
+.world-nudge {
+  margin: 18px 0 40px;
+}
+@media (min-width: 1024px) {
+  .world {
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+  }
+  .world-side {
+    position: sticky;
+    top: 16px;
+    background: var(--shine), var(--grain), var(--tc);
+    border-radius: 28px;
+    padding: 22px;
+    box-shadow:
+      inset 0 1px 0 oklch(100% 0 0 / 0.7),
+      var(--shadow);
+  }
+  .world-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .world-mascot {
+    width: 140px !important;
+    height: 140px !important;
+    background: oklch(100% 0 0 / 0.45);
+    align-self: center;
+  }
+  .world-title {
+    font-size: 34px;
+  }
+  .world-sub {
+    color: var(--ink-2);
+  }
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .world-nudge {
+    max-width: 300px;
+    margin-top: -4px;
+  }
+}
