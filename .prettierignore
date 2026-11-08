@@ -11,3 +11,8 @@ club-agent/skills/writing-plans/
 club-agent/skills/verification/
 # Template with {{PLACEHOLDERS}} in YAML front matter: Prettier would rewrite them to { { X } }.
 club-agent/templates/workspace/profile.md
+# Site build output and generated files
+site/.next/
+site/out/
+site/next-env.d.ts
+site/package-lock.json

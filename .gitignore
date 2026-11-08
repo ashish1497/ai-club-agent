@@ -2,3 +2,8 @@
 .DS_Store
 __pycache__/
 node_modules/
+site/.next/
+site/out/
+site/next-env.d.ts
+site/node_modules/
+*.tsbuildinfo
