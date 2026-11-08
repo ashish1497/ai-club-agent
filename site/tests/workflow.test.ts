@@ -13,6 +13,9 @@ describe("deploy workflow", () => {
     expect(wf).toMatch(/vercel@[^\s]+ deploy site\/out --prod/);
     expect(wf).not.toMatch(/working-directory: site/);
   });
+  it("needs no URL variables, because the URLs are fixed in config", () => {
+    expect(wf).not.toMatch(/NEXT_PUBLIC_/);
+  });
   it("builds once", () => {
     expect(wf).not.toMatch(/vercel@[^\s]+ build/);
   });

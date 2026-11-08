@@ -20,7 +20,7 @@ The kit is downloaded into a folder called `ai-club-agent` in your home folder. 
 
 1. **Open Terminal.** Press `Cmd + Space`, type `Terminal`, and press Enter. A window with a blinking cursor opens.
 2. **Download the kit.** Copy this line, paste it into Terminal, and press Enter:
-   `git clone <club-agent repo URL> ~/ai-club-agent`
+   `git clone https://github.com/ashish1497/ai-club-agent ~/ai-club-agent`
    You'll see a few lines ending in "done". You now have a folder called `ai-club-agent` in your home folder.
 3. **Build your workspace.** Copy, paste, and press Enter:
    `bash ~/ai-club-agent/club-agent/install/install.sh`
@@ -29,7 +29,7 @@ The kit is downloaded into a folder called `ai-club-agent` in your home folder. 
    2. **Your AI comfort level**, from `L1` (new to this) to `L5` (I build things). Type it exactly like that, for example `L2`.
    3. **Fields that interest you**, separated by commas, for example `fintech, healthtech`.
    4. **Intensity:** press Enter to take the default for your level, or type `gentle`, `standard` or `relentless`.
-4. **Check that it worked.** The last lines should say `Club Agent workspace ready.` and `Open this folder in Claude Code: /Users/<you>/my-research`.
+4. **Check that it worked.** The last lines should say `Club Agent workspace ready.` and `Open this folder in Claude Code:` followed by a path ending in `/my-research`.
 
 Running step 3 again is safe. It never overwrites your files, and it won't ask the questions again.
 
@@ -37,7 +37,7 @@ Running step 3 again is safe. It never overwrites your files, and it won't ask t
 
 1. **Open PowerShell.** Press the Windows key, type `PowerShell`, and press Enter.
 2. **Download the kit.** Copy, paste, and press Enter:
-   `git clone <club-agent repo URL> $HOME\ai-club-agent`
+   `git clone https://github.com/ashish1497/ai-club-agent $HOME\ai-club-agent`
 3. **Build your workspace.** Copy, paste, and press Enter, then answer the same four questions as on macOS:
    `powershell -ExecutionPolicy Bypass -File $HOME\ai-club-agent\club-agent\install\install.ps1`
 4. **Check that it worked.** The last lines should say `Open this folder in Claude Code:` followed by your `my-research` folder.

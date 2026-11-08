@@ -138,4 +138,8 @@ test("start page renders the setup guide without placeholders", async ({ page })
   await page.goto("/start/");
   await expect(page.getByRole("heading", { name: "Install (macOS)" })).toBeVisible();
   await expect(page.locator("body")).not.toContainText("<club-agent repo URL>");
+  await expect(page.locator("body")).toContainText(
+    "git clone https://github.com/ashish1497/ai-club-agent ~/ai-club-agent",
+  );
+  await expect(page.locator("body")).toContainText("bash ~/ai-club-agent/club-agent/install/install.sh");
 });

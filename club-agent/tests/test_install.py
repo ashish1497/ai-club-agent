@@ -195,3 +195,26 @@ class TestSetupGuidePaths(unittest.TestCase):
             self.assertIn(p, paths)
         for p in paths:
             self.assertTrue((repo / p.rstrip("/.")).exists(), f"guide path missing in repo: {p}")
+
+
+class TestNoPlaceholders(unittest.TestCase):
+    # What: the guide uses the real repo URL, and no file in the repo carries a leftover placeholder.
+    # How: check the guide's clone lines, then scan tracked text files for known placeholder markers.
+    # Objective: a member never copies a command that cannot work.
+    def test_guide_clones_the_real_repo(self):
+        text = GUIDE.read_text()
+        self.assertIn("git clone https://github.com/ashish1497/ai-club-agent ~/ai-club-agent", text)
+        self.assertIn("git clone https://github.com/ashish1497/ai-club-agent $HOME\\ai-club-agent", text)
+
+    def test_no_placeholders_in_repo(self):
+        repo = KIT.parent
+        files = subprocess.run(["git", "ls-files"], cwd=repo, capture_output=True, text=True).stdout.split()
+        markers = ["<club-agent repo URL>", "REPLACE-ME", "<you>"]
+        # Tests are skipped: they name the markers in order to assert they are absent.
+        skip = ("docs/superpowers/", "club-agent/tests/", "site/tests/", "site/e2e/", "package-lock.json")
+        for f in files:
+            if f.startswith(skip) or not f.endswith((".md", ".ts", ".tsx", ".yml", ".json", ".sh", ".ps1", ".example")):
+                continue
+            text = (repo / f).read_text(errors="ignore")
+            for m in markers:
+                self.assertNotIn(m, text, f"placeholder {m!r} in {f}")

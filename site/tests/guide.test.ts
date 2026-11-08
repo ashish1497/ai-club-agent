@@ -11,8 +11,8 @@ describe("setup guide", () => {
     expect(g.html).toMatch(/<h2[^>]*>Install \(macOS\)<\/h2>/);
     expect(g.html).toMatch(/<h2[^>]*>Install \(Windows\)<\/h2>/);
   });
-  it("replaces the repo placeholder with KIT_REPO_URL", () => {
-    expect(g.html).toContain(KIT_REPO_URL);
+  it("shows the real clone command and no placeholder", () => {
+    expect(g.html).toContain(`git clone ${KIT_REPO_URL} ~/ai-club-agent`);
     expect(g.html).not.toContain("&lt;club-agent repo URL&gt;");
     expect(g.html).not.toContain("<club-agent repo URL>");
   });

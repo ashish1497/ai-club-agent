@@ -33,10 +33,10 @@ From the repo root:
 
 ## Configure
 
-| Setting                    | Where                                       | Default                                       |
-| -------------------------- | ------------------------------------------- | --------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`     | GitHub repository variable (and Vercel env) | `https://ai-club-problems.vercel.app`         |
-| `NEXT_PUBLIC_KIT_REPO_URL` | GitHub repository variable (and Vercel env) | `https://github.com/REPLACE-ME/ai-club-agent` |
+The two public URLs are fixed in `site/src/config.ts`, so there is nothing to set in GitHub or Vercel:
+
+- Site: https://ai-club-agent.vercel.app
+- Kit repo: https://github.com/ashish1497/ai-club-agent
 
 ## Deploy
 
@@ -45,4 +45,3 @@ From the repo root:
 0. Git-triggered Vercel deployments are disabled by the root `vercel.json` (`git.deploymentEnabled: false`), so only this tested workflow deploys, even if the repo is connected to Vercel.
 1. Create a Vercel project. The workflow uploads the already-built `site/out` folder, so set Framework Preset to **Other** and leave Root Directory and Build Command empty.
 2. In GitHub, add these repository secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID`. Run `vercel link` at the repo root, then copy them from `.vercel/project.json`.
-3. Add the repository variables `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_KIT_REPO_URL`.

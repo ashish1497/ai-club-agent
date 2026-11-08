@@ -1,22 +1,11 @@
 // What: Site-wide configuration: public URLs and where the content lives.
-// How: Env vars with safe defaults; the repo root is found by walking up to the folder that holds club-agent/.
-// Objective: One place to change the site URL or the kit's clone URL once GitHub and Vercel exist.
+// How: Fixed constants for the live domain and the GitHub repo; the repo root is found by walking up to the folder that holds club-agent/.
+// Objective: One place for the two public URLs, with nothing to configure in GitHub or Vercel.
 import { existsSync } from "node:fs";
 import path from "node:path";
 
-// `||` (not `??`): GitHub Actions passes an unset repository variable as an empty string.
-function urlFromEnv(name: string, fallback: string): string {
-  const value = process.env[name] || fallback;
-  try {
-    new URL(value);
-  } catch {
-    throw new Error(`${name} must be an absolute URL, got "${value}"`);
-  }
-  return value.replace(/\/$/, "");
-}
-
-export const SITE_URL = urlFromEnv("NEXT_PUBLIC_SITE_URL", "https://ai-club-problems.vercel.app");
-export const KIT_REPO_URL = urlFromEnv("NEXT_PUBLIC_KIT_REPO_URL", "https://github.com/REPLACE-ME/ai-club-agent");
+export const SITE_URL = "https://ai-club-agent.vercel.app";
+export const KIT_REPO_URL = "https://github.com/ashish1497/ai-club-agent";
 
 function findRepoRoot(start: string): string {
   let dir = start;
