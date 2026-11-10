@@ -9,7 +9,7 @@ from tests._frontmatter import parse_frontmatter, has_wao_header
 from tests.catalog import EXPECTED_SKILLS, ORIGIN
 
 KIT = Path(__file__).resolve().parent.parent
-SKILLS = KIT / "skills"
+SKILLS = KIT.parent / ".claude" / "skills"
 LICENSE_FOR = {"mattpocock/skills": "mattpocock-skills.txt",
                "obra/superpowers": "obra-superpowers.txt",
                "K-Dense-AI/claude-scientific-skills": "k-dense-scientific-skills.txt"}
@@ -70,13 +70,27 @@ class TestSkills(unittest.TestCase):
                 for h in ["## Steps", "## Output", "## Exit check"]:
                     self.assertRegex(body, rf"(?m)^{h}\s*$", f"{d.name}: {h}")
 
-    def test_output_paths_are_workspace_relative(self):
+    def test_output_paths_are_inside_research(self):
         for d in skill_dirs():
             if ORIGIN.get(d.name) in ("custom", "adapted"):
                 _, body = load(d.name)
                 out = section(body, "## Output")
                 for path in re.findall(r"`([^`]+\.md)`", out):
-                    self.assertFalse(path.startswith("/"), f"{d.name}: {path}")
+                    if d.name == "share-pack":
+                        self.assertTrue(path.startswith("club-packs/packs/"), f"{d.name}: {path}")
+                    else:
+                        self.assertTrue(path.startswith("research/"), f"{d.name}: {path}")
+
+    def test_no_old_workspace_paths(self):
+        for d in skill_dirs():
+            if ORIGIN.get(d.name) in ("custom", "adapted"):
+                text = (d / "SKILL.md").read_text()
+                for old in ["`club/", "my-research", "club-packs location"]:
+                    self.assertNotIn(old, text, f"{d.name}: {old}")
+
+    def test_handoff_saves_and_share_pack_uses_script(self):
+        self.assertIn("club-agent/scripts/save.sh", (SKILLS / "handoff" / "SKILL.md").read_text())
+        self.assertIn("club-agent/scripts/share-pack.sh", (SKILLS / "share-pack" / "SKILL.md").read_text())
 
     def test_vendored_has_source_and_license(self):
         for d in skill_dirs():
@@ -112,7 +126,7 @@ class TestSkills(unittest.TestCase):
 
     def test_triage_loads_club_problem_by_number(self):
         steps = section(load("triage")[1], "## Steps")
-        self.assertIn("club/problems/", steps)
+        self.assertIn("club-agent/problems/", steps)
         self.assertIn("start problem", steps)
 
     def test_frame_question_student_first(self):

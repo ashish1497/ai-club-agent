@@ -5,12 +5,12 @@ node_modules/
 package-lock.json
 .superpowers/
 club-agent/LICENSES/
-club-agent/skills/tdd/
-club-agent/skills/to-spec/
-club-agent/skills/writing-plans/
-club-agent/skills/verification/
+.claude/skills/tdd/
+.claude/skills/to-spec/
+.claude/skills/writing-plans/
+.claude/skills/verification/
 # Template with {{PLACEHOLDERS}} in YAML front matter: Prettier would rewrite them to { { X } }.
-club-agent/templates/workspace/profile.md
+club-agent/templates/research/profile.md
 # Site build output and generated files
 site/.next/
 site/out/
@@ -18,3 +18,4 @@ site/next-env.d.ts
 site/package-lock.json
 site/test-results/
 site/playwright-report/
+research/

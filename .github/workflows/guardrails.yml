@@ -1,0 +1,24 @@
+# What: Guardrails for member branches and pull requests into main.
+# How: Runs club-agent/scripts/check-branch.sh against main: PRs into main may not touch research/; member/* branches may
+#      only touch research/; nothing under private-data/ anywhere.
+# Objective: member work and club files never mix on GitHub, even if a local git hook was skipped.
+name: Guardrails
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: ["member/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check changed files
+        run: bash club-agent/scripts/check-branch.sh ${{ github.event_name == 'pull_request' && 'pr' || 'member' }} origin/main

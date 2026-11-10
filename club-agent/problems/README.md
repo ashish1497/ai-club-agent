@@ -7,7 +7,7 @@
 ## How to use
 
 1. Pick a problem below.
-2. In your `my-research` workspace, tell the agent: `start problem <NN>`.
+2. In Claude Code, with the `ai-club-agent` folder open on your member branch, tell the agent: `start problem <NN>`.
 3. The agent reads the file, runs `triage`, and walks you through the journey. The "Possible angles" are starting points only; your framing is your own.
 
 ## How to add a problem

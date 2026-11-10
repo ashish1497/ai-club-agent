@@ -1,4 +1,6 @@
 # What: Pre-push gate.
 # How: Full verification: format, lint, kit + site unit tests, static build, then Playwright smoke, sanity and regression suites in a real browser.
 # Objective: Nothing reaches the shared repo with a broken page, flow or layout rule.
+# Member branches use the club's member hooks instead (an `npm install` can point git back at Husky).
+case "$(git branch --show-current)" in member/*) exec bash club-agent/githooks/pre-push "$@" ;; esac
 npm run verify

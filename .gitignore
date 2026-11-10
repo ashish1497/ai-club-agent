@@ -13,3 +13,6 @@ site/test-results/
 site/playwright-report/
 site/blob-report/
 site/.env*.local
+# Member research: raw personal data never reaches git; Claude Code local settings stay on the laptop.
+research/private-data/
+.claude/settings.local.json*

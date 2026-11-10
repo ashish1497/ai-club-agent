@@ -6,9 +6,13 @@
 
 ## Unreleased
 
-- The constitution is now copied into each workspace as `CLUB-RULES.md`, and `CLAUDE.md` imports that copy, so Claude Code no longer asks to approve an external import. The installer refreshes it on every run. **Migration:** after `git pull`, re-run the installer; it switches an existing `@club/AGENTS.md` line in your `CLAUDE.md` to `@CLUB-RULES.md` and leaves the rest of the file alone.
-- Installer asks where to put the research folder (Enter keeps `~/my-research`; `~` and relative paths work). `--workspace` still skips the question.
-- Setup guide: clone into `~/ai-club-agent` with the real repo URL (the old `~/club-agent/install` path did not exist after cloning), plain step-by-step instructions and a troubleshooting table. No action needed for existing workspaces.
+- **One repo, one branch per member.** Members clone `ai-club-agent` and run `club-agent/install/setup.sh`, which creates their branch `member/<github-name>` and a `research/` folder for their work. The separate `my-research` workspace, the `club` link and the old installers (`install.sh`, `install.ps1`) are gone. Skills moved to the repo's `.claude/skills/`, and the repo's `CLAUDE.md` loads the constitution directly, so there's no import prompt.
+- Club updates arrive automatically: a Claude Code session-start hook (`club-agent/scripts/sync.sh`) merges `main` into the member's branch and tells the agent what arrived.
+- `wrap up` saves `research/` to the member's GitHub branch (`club-agent/scripts/save.sh`). New `share-pack` skill and script: a member's pack goes to the library as a one-file pull request.
+- Guardrails: `research/private-data/` is git-ignored and unreadable by the agent; local git hooks keep member branches to `research/`; a GitHub workflow re-checks member pushes and pull requests into `main`.
+- Hardening: work saved on one laptop arrives on the next session on another; uploads recover when another laptop pushed first and say why when a guardrail blocks them; a pre-push check stops private data and club-file edits even after `--no-verify`; member commits use a GitHub no-reply email; `.gitattributes` keeps scripts runnable in Git Bash on Windows.
+- **Migration** for anyone who used `my-research`: clone the repo, run setup, then copy your old `my-research/problems/`, `domains/`, `digests/`, `LOCAL.md`, `profile.md` and `watchlist.md` into `research/`, and say `wrap up` to save them. Leave raw personal data out of git.
+- Setup guide: plain step-by-step instructions with the real repo URL, and a troubleshooting table.
 - Problem site (`site/`): static Next.js "Paper Arcade" site that renders the problem library by industry, in bite-sized steps, with browser-only state; GitHub Action deploys to Vercel from main.
 
 - Problem statements enriched: who cares, in/out of scope, sourced "what is known" (every claim linked), key terms, starting points (datasets, reports, regulators), funding links, level fit, effort, skills, and "Leads to check" for anything unverified. 189 links checked at build time.

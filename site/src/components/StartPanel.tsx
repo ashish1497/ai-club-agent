@@ -13,8 +13,8 @@ export function StartPanel({ id }: { id: string }) {
         Ready to crack it?
       </h2>
       <ol className="start-steps">
-        <li>Install the Club Agent (once, about 10 minutes).</li>
-        <li>Open your research folder in Claude Code.</li>
+        <li>Set up the Club Agent (once, about 15 minutes).</li>
+        <li>Open the ai-club-agent folder in Claude Code.</li>
         <li>Tell it which problem.</li>
       </ol>
       <pre className="term">

@@ -60,7 +60,7 @@ class TestAgentsMd(unittest.TestCase):
     def test_routing_triage_accepts_club_problem_number(self):
         routing = section(self.text, "## Routing")
         self.assertIn("club problem number", routing)
-        self.assertIn("club/problems/", self.text)
+        self.assertIn("club-agent/problems/", self.text)
 
     def test_agents_md_handles_missing_profile(self):
         ss = section(self.text, "## Session start")
@@ -81,6 +81,18 @@ class TestAgentsMd(unittest.TestCase):
         ss = section(self.text, "## Session start")
         self.assertIn("digest_every_days", ss)
         self.assertIn("last_digest", ss)
+
+    def test_member_branch_layout_and_scripts(self):
+        files = section(self.text, "## Files and precedence")
+        for phrase in ["member/<github-name>", "research/", "club-agent/scripts/", "save.sh", "share-pack.sh"]:
+            self.assertIn(phrase, files)
+        self.assertNotIn("my-research", self.text)
+        self.assertNotIn("`club/", self.text)
+
+    def test_session_start_relays_sync_and_offers_setup(self):
+        ss = section(self.text, "## Session start")
+        self.assertIn("Club update check:", ss)
+        self.assertIn("club-agent/install/setup.sh --non-interactive --github", ss)
 
     def test_wao_header(self):
         self.assertTrue(has_wao_header(self.text))

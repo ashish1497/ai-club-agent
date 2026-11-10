@@ -141,5 +141,5 @@ test("start page renders the setup guide without placeholders", async ({ page })
   await expect(page.locator("body")).toContainText(
     "git clone https://github.com/ashish1497/ai-club-agent ~/ai-club-agent",
   );
-  await expect(page.locator("body")).toContainText("bash ~/ai-club-agent/club-agent/install/install.sh");
+  await expect(page.locator("body")).toContainText("cd ~/ai-club-agent && bash club-agent/install/setup.sh");
 });

@@ -1,0 +1,7 @@
+# What: Line-ending rules for git.
+# How: Shell scripts and git hooks are always checked out with LF, even by Git for Windows (which defaults to CRLF).
+# Objective: setup.sh, the session-start sync and the git hooks run in Git Bash on Windows ("pipefail\r: invalid option" otherwise).
+* text=auto
+*.sh text eol=lf
+club-agent/githooks/* text eol=lf
+.husky/* text eol=lf

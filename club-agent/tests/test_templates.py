@@ -1,4 +1,4 @@
-# What: Tests for the student workspace, problem and domain-pack templates.
+# What: Tests for the member research/, problem and domain-pack templates.
 # How: Check each template exists, opens with What/How/Objective, and carries the exact tokens skills rely on.
 # Objective: Skills and the installer can depend on fixed headings, columns and placeholders.
 import unittest
@@ -9,7 +9,7 @@ from tests._frontmatter import has_wao_header
 KIT = Path(__file__).resolve().parent.parent
 T = KIT / "templates"
 
-WORKSPACE = ["AGENTS.md", "CLAUDE.md", "LOCAL.md", "profile.md", "watchlist.md"]
+RESEARCH = ["LOCAL.md", "profile.md", "watchlist.md"]
 PROBLEM = ["brief.md", "glossary.md", "field-map.md", "sources.md", "gaps.md", "bets.md", "log.md", "tests/README.md"]
 EVIDENCE = ["human study", "animal", "bench", "simulation", "preprint", "industry claim", "news", "opinion"]
 CONFIDENCE = ["established", "contested", "unknown"]
@@ -23,7 +23,7 @@ def read(*p):
 
 class TestTemplates(unittest.TestCase):
     def all_paths(self):
-        return ([T / "workspace" / f for f in WORKSPACE] + [T / "problem" / f for f in PROBLEM]
+        return ([T / "research" / f for f in RESEARCH] + [T / "problem" / f for f in PROBLEM]
                 + [T / "domain-pack.md"])
 
     def test_all_templates_exist(self):
@@ -76,23 +76,20 @@ class TestTemplates(unittest.TestCase):
             self.assertIn(h, text)
 
     def test_profile_placeholders(self):
-        text = read("workspace", "profile.md")
+        text = read("research", "profile.md")
         for ph in ["{{NAME}}", "{{LEVEL}}", "{{INTENSITY}}", "{{INTERESTS}}"]:
             self.assertIn(ph, text)
         for key in ["name:", "level:", "intensity:", "interests:", "digest_every_days: 7",
                     "last_digest: never", "active_problem:"]:
             self.assertIn(key, text)
 
-    def test_workspace_claude_md_exact(self):
-        lines = read("workspace", "CLAUDE.md").strip().splitlines()
-        self.assertEqual(lines[:2], ["@CLUB-RULES.md", "@LOCAL.md"])
-        self.assertNotIn("@club/", "\n".join(lines))
-        self.assertIn("constitution", "\n".join(lines[2:]))
+    def test_research_local_md_has_no_library_setting(self):
+        self.assertNotIn("club-packs location", read("research", "LOCAL.md"))
 
-    def test_codex_stub_points_to_club(self):
-        self.assertIn("Before anything else, read CLUB-RULES.md, then LOCAL.md. LOCAL.md wins on conflict.",
-                      read("workspace", "AGENTS.md"))
-
+    def test_repo_entry_points(self):
+        repo = KIT.parent
+        self.assertEqual((repo / "CLAUDE.md").read_text().splitlines()[:2], ["@club-agent/AGENTS.md", "@research/LOCAL.md"])
+        self.assertIn("read club-agent/AGENTS.md, then research/LOCAL.md", (repo / "AGENTS.md").read_text())
 
 if __name__ == "__main__":
     unittest.main()

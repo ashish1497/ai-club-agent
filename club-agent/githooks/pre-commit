@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# What: Git pre-commit guardrail for members (enabled by setup.sh via core.hooksPath).
+# How: Never commit private-data/. On member/* branches only research/ may change (merges from main excepted); on other
+#      branches research/ may not be committed. Maintainers' Husky checks still run on non-member branches.
+# Objective: club files and member work never get mixed, and raw personal data never enters git.
+root="$(git rev-parse --show-toplevel)"
+staged="$(git diff --cached --name-only)"
+private="$(printf '%s\n' "$staged" | grep -E '(^|/)private-data/' | grep -v '/\.gitkeep$' || true)"
+if [ -n "$private" ]; then
+  echo "Blocked: private-data files must never be committed:" >&2; echo "$private" >&2
+  echo "Undo with: git restore --staged <file>" >&2; exit 1
+fi
+branch="$(git branch --show-current)"
+case "$branch" in
+  member/*)
+    [ -f "$(git rev-parse --git-dir)/MERGE_HEAD" ] && exit 0
+    bad="$(printf '%s\n' "$staged" | grep -vE '^research/' | grep -v '^$' || true)"
+    if [ -n "$bad" ]; then
+      echo "Blocked: on your member branch only research/ can change. These are club files:" >&2; echo "$bad" >&2
+      echo "Undo with: git restore --staged --worktree <file>" >&2; exit 1
+    fi
+    exit 0 ;;
+esac
+bad="$(printf '%s\n' "$staged" | grep -E '^research/' || true)"
+if [ -n "$bad" ]; then echo "Blocked: research/ belongs on a member/* branch, not $branch." >&2; exit 1; fi
+if [ -f "$root/.husky/pre-commit" ] && [ -d "$root/node_modules" ]; then exec sh "$root/.husky/pre-commit"; fi
+exit 0

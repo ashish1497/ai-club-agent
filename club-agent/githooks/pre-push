@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# What: Git pre-push hook (enabled by setup.sh via core.hooksPath; Husky hands member branches here too).
+# How: For each member/* branch being pushed, run the same check as GitHub (check-branch.sh member) on the commits being
+#      pushed, so private-data/ files or club-file edits are stopped even if a commit skipped pre-commit (--no-verify).
+#      Other branches run the maintainers' Husky pre-push check when installed.
+# Objective: raw personal data never reaches the public repo, members never wait on site builds, maintainers keep full checks.
+root="$(git rev-parse --show-toplevel)"
+member=0 blocked=0
+while read -r local_ref local_sha _remote_ref _remote_sha; do
+  case "$local_ref" in refs/heads/member/*) ;; *) continue ;; esac
+  member=1
+  case "$local_sha" in *[!0]*) ;; *) continue ;; esac   # branch deletion: nothing to check
+  git rev-parse -q --verify origin/main >/dev/null || continue
+  bash "$root/club-agent/scripts/check-branch.sh" member origin/main "$local_sha" >&2 || blocked=1
+done
+if [ "$blocked" = 1 ]; then
+  echo "Blocked: this push would upload files that must not leave your laptop (see above)." >&2
+  exit 1
+fi
+case "$(git branch --show-current)" in member/*|pack/*) exit 0 ;; esac
+[ "$member" = 1 ] && exit 0
+if [ -f "$root/.husky/pre-push" ] && [ -d "$root/node_modules" ]; then exec sh "$root/.husky/pre-push"; fi
+exit 0

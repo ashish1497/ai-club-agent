@@ -88,6 +88,8 @@ Skills are **thinking moves, not per-problem recipes**. PPG, finance and protein
 
 ### 5.2 Two folders: club kit vs student workspace
 
+> **Superseded (2026-11-10):** members now work in one clone of the `ai-club-agent` repo, on their own `member/<github-name>` branch, in a `research/` folder; see the repo `README.md` and `club-agent/install/SETUP-GUIDE.md`. The layout below is kept for history.
+
 Club material and student work are separated so the club can ship updates without touching anyone's work.
 
 ```text

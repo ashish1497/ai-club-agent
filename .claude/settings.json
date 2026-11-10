@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "deny": ["Read(./research/private-data/**)", "Edit(./research/private-data/**)", "Bash(*private-data*)"]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/club-agent/scripts/sync.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,5 +1,7 @@
 # What: Pre-commit gate for every contributor.
 # How: lint-staged runs Prettier then ESLint on staged files (auto-fixing), then the kit test suite runs.
 # Objective: Nothing unformatted, unlinted or test-breaking gets committed.
+# Member branches use the club's member hooks instead (an `npm install` can point git back at Husky).
+case "$(git branch --show-current)" in member/*) exec bash club-agent/githooks/pre-commit ;; esac
 npx lint-staged
 npm test

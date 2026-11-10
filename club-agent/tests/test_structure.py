@@ -13,11 +13,13 @@ KIT = Path(__file__).resolve().parent.parent
 
 class TestStructure(unittest.TestCase):
     def test_required_root_files_exist(self):
-        for name in ["README.md", "CHANGELOG.md", "FUNDAMENTALS.md", "CLAUDE.md"]:
+        for name in ["README.md", "CHANGELOG.md", "FUNDAMENTALS.md"]:
             self.assertTrue((KIT / name).is_file(), name)
 
-    def test_claude_md_imports_agents(self):
-        self.assertEqual((KIT / "CLAUDE.md").read_text().strip(), "@AGENTS.md")
+    def test_repo_claude_md_imports_constitution_then_local(self):
+        lines = (KIT.parent / "CLAUDE.md").read_text().splitlines()
+        self.assertEqual(lines[:2], ["@club-agent/AGENTS.md", "@research/LOCAL.md"])
+        self.assertIn("Club Agent: Constitution", "\n".join(lines[2:]))
 
     def test_fundamentals_has_eleven(self):
         text = (KIT / "FUNDAMENTALS.md").read_text()
@@ -40,8 +42,8 @@ class TestStructure(unittest.TestCase):
         self.assertFalse(has_wao_header("**What:** a\n**How:** b"))
 
     def test_catalog_shape(self):
-        self.assertEqual(len(EXPECTED_SKILLS), 20)
-        self.assertEqual(len(set(EXPECTED_SKILLS)), 20)
+        self.assertEqual(len(EXPECTED_SKILLS), 21)
+        self.assertEqual(len(set(EXPECTED_SKILLS)), 21)
         self.assertEqual(set(ORIGIN), set(EXPECTED_SKILLS))
         self.assertEqual(set(ORIGIN.values()), {"custom", "adapted", "vendored"})
 
